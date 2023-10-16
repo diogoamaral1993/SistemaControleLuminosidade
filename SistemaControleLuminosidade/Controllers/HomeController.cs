@@ -15,7 +15,12 @@ namespace SistemaControleLuminosidade.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            tb_lampada lampada = new tb_lampada();
+            lampada.id_lampada = 1;
+            lampada.nome_lampada = "Lampada 1";
+            lampada.Status = "Ligada";
+            lampada.DataUltimaAtualizacao = DateTime.Now;
+            return View(lampada);
         }
 
         public IActionResult Privacy()
@@ -23,10 +28,10 @@ namespace SistemaControleLuminosidade.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }
