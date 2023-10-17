@@ -6,17 +6,17 @@ namespace SistemaControleLuminosidade.Repositore
 {
     public class LampadaRepositore
     {
-        ApplicationContext Context;
+        ApplicationContext context;
         public LampadaRepositore()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("StringConnection");
-            var Context = new ApplicationContext(optionsBuilder.Options);
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True;");
+            context = new ApplicationContext(optionsBuilder.Options);
         }
 
         public List<tb_lampada> BuscarLampadas() 
         {
-            return Context.tb_lampada.ToList();
+            return context.tb_lampada.ToList();
         }
     }
 }

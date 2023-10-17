@@ -1,33 +1,38 @@
-﻿@model tb_lampada
+﻿@model List<tb_lampada>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Painel de Controle</h1>
-
     <table class="table">
         <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Status</th>
-                <th scope="col">Ultima atualização</th>
+                <th scope="col">Ligada pela última vez</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row">@Model.id_lampada</th>
-                <td>@Model.nome_lampada</td>
-                <td>@Model.Status</td>
-                <td>@Model.DataUltimaAtualizacao</td>
-            </tr>
-            <tr>
-                <th scope="row">@Model.id_lampada</th>
-                <td>@Model.nome_lampada</td>
-                <td>@Model.Status</td>
-                <td>@Model.DataUltimaAtualizacao</td>
-            </tr>
-        </tbody>
+        @foreach (var lampada in Model)
+        {
+            <tbody>
+                <tr>
+                    @if (@lampada.situacao_lampada == "Ligado")
+                    {
+                        <td><img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48"></td>
+                    }
+                    else
+                    {
+                        <td><img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48"></td>
+                    }
+                    <th scope="row">@lampada.id_lampada</th>
+                    <td>@lampada.nome_lampada</td>
+                    <td>@lampada.situacao_lampada</td>
+                    <td>@lampada.data_ultima_atualizacao?.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+            </tbody>
+        }
     </table>
 </div>
