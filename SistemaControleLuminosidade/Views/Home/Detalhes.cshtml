@@ -1,0 +1,54 @@
+﻿@model tb_lampada
+@{
+    ViewData["Title"] = "Detalhes";
+}
+<div class="text-center">
+    <h1 class="display-4">Detalhes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ligada pela última vez</th>
+                <th scope="col">Data de inclusão da lampada</th>
+                @if (Model.data_fim != null)
+                {
+                    <th scope="col">Data de remoção da lâmpada</th>
+                }
+                <th scope="col">Quantidade de vezes que a lâmpada foi acionada</th>
+                <th scope="col">Situação da lâmpada</th>
+                <th scope="col">Status da lâmpada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @if (Model.situacao_lampada == "Ligado")
+                {
+                    <td>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48">
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48">
+                    </td>
+                }
+                <th scope="row">@Model.id_lampada</th>
+                <td>@Model.nome_lampada</td>
+                <td>@Model.situacao_lampada</td>
+                <td>@Model.data_ultima_atualizacao?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@Model.data_inclusao.ToString("dd/MM/yyyy HH:mm")</td>
+                @if (Model.data_fim != null)
+                {
+                    <td>@Model.data_fim?.ToString("dd/MM/yyyy HH:mm")</td>
+                }
+                <td>@Model.quantidade_vezes_ligacao</td>
+                <td>@Model.situacao_lampada</td>
+                <td>@Model.status_lampada</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

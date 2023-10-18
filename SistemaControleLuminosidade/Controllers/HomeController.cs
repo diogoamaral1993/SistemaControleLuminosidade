@@ -16,33 +16,16 @@ namespace SistemaControleLuminosidade.Controllers
 
         public IActionResult Index()
         {
-            List<tb_lampada> lampadas = new List<tb_lampada>();
             LampadaRepositore Repositore = new LampadaRepositore();
-
-            lampadas = Repositore.BuscarLampadas();
-            
-            //lampadas.Add(new tb_lampada
-            //{
-            //   id_lampada = 1,
-            //   nome_lampada = "Lampada 1",
-            //   situacao_lampada = "Ligada",
-            //   data_ultima_atualizacao = DateTime.Now
-            //});
-
-            //lampadas.Add(new tb_lampada
-            //{
-            //    id_lampada = 2,
-            //    nome_lampada = "Lampada 2",
-            //    situacao_lampada = "Desligada",
-            //    data_ultima_atualizacao = Convert.ToDateTime("10/16/2023")
-            //});
-
+            var lampadas = Repositore.BuscarLampadas();
             return View(lampadas);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Detalhes(int id_lampada)
         {
-            return View();
+            LampadaRepositore Repositore = new LampadaRepositore();
+            var lampada = Repositore.BuscarLampadaPorId(id_lampada);
+            return View(lampada);
         }
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

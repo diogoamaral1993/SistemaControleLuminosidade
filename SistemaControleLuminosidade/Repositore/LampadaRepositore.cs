@@ -18,5 +18,10 @@ namespace SistemaControleLuminosidade.Repositore
         {
             return context.tb_lampada.ToList();
         }
+
+        public tb_lampada BuscarLampadaPorId(int id_lampada) 
+        {
+            return context.tb_lampada.FirstOrDefault(l => l.id_lampada == id_lampada);
+        }
     }
 }

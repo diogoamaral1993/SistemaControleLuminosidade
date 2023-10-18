@@ -21,11 +21,19 @@
                 <tr>
                     @if (@lampada.situacao_lampada == "Ligado")
                     {
-                        <td><img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48"></td>
+                        <td>
+                            <a href="@Url.Action("Detalhes", "Home", new { id_lampada =  lampada.id_lampada})">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48">
+                            </a>
+                        </td>
                     }
                     else
                     {
-                        <td><img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48"></td>
+                        <td>
+                            <a href="@Url.Action("Detalhes", "Home", new { id_lampada =  lampada.id_lampada})">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48">
+                            </a>
+                        </td>
                     }
                     <th scope="row">@lampada.id_lampada</th>
                     <td>@lampada.nome_lampada</td>
