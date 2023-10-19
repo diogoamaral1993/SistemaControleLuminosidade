@@ -25,13 +25,15 @@ INSERT INTO tb_lampada
 			 data_inclusao,
 			 data_ultima_atualizacao,
 			 situacao_lampada,
-			 status_lampada)
+			 status_lampada,
+			 quantidade_vezes_ligacao)
 	  VALUES (3,
-	          'BL1_A1_SP1.1_L1.1',
+	          'BL1_A1_SP1.1_L1',
 	          '10/05/2023',
 			  GETDATE(),
 			  'Ligado',
-			  'A')
+			  'Ativo',
+			  5)
 
 INSERT INTO tb_lampada 
             (id_sensor,
@@ -39,13 +41,15 @@ INSERT INTO tb_lampada
 			 data_inclusao,
 			 data_ultima_atualizacao,
 			 situacao_lampada,
-			 status_lampada)
+			 status_lampada,
+			 quantidade_vezes_ligacao)
 	  VALUES (3,
-	          'BL1_A1_SP1.1_L2.1',
+	          'BL1_A1_SP1.1_L2',
 	          '10/05/2023',
 			  GETDATE() - 1,
 			  'Desligado',
-			  'A')
+			  'Ativo',
+			  9)
 			  
 INSERT INTO tb_sensor
             (nome_sensor, 
@@ -62,5 +66,7 @@ INSERT INTO tb_sensor
 			 delete tb_lampada
 
 			 drop table tb_lampada
+
+
 
 			

@@ -27,11 +27,5 @@ namespace SistemaControleLuminosidade.Controllers
             var lampada = Repositore.BuscarLampadaPorId(id_lampada);
             return View(lampada);
         }
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }
