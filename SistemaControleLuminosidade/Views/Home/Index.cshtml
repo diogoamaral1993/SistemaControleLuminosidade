@@ -1,8 +1,8 @@
 ﻿@model List<tb_lampada>
 @{
     ViewData["Title"] = "Home Page";
-    var FiltroSituacao = "Ligado";
-    var FiltroStatus = "Ligado";
+    var FiltroSituacao = "Todos";
+    var FiltroStatus = "Todos";
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -12,11 +12,20 @@
         FiltroSituacao = valor;
 
         // Use jQuery para mostrar/ocultar as linhas da tabela
-        $('tbody[data-situacao]').hide();
+        $('tbody[data-situacao][data-status]').hide();
+
         if (FiltroSituacao === 'Todos') {
-            $('tbody[data-situacao]').show();
+            if (FiltroStatus === 'Todos') {
+                $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando ambos são "Todos"
+            } else {
+                $('tbody[data-status="' + FiltroStatus + '"]').show(); // Mostrar apenas com base no filtro de status
+            }
         } else {
-            $('tbody[data-situacao="' + FiltroSituacao + '"]').show();
+            if (FiltroStatus === 'Todos') {
+                $('tbody[data-situacao="' + FiltroSituacao + '"]').show(); // Mostrar apenas com base no filtro de situação
+            } else {
+                $('tbody[data-situacao="' + FiltroSituacao + '"][data-status="' + FiltroStatus + '"]').show(); // Mostrar com base em ambos os filtros
+            }
         }
     }
 
@@ -24,11 +33,20 @@
         FiltroStatus = valor;
 
         // Use jQuery para mostrar/ocultar as linhas da tabela
-        $('tbody[data-status]').hide();
+        $('tbody[data-situacao][data-status]').hide();
+
         if (FiltroStatus === 'Todos') {
-            $('tbody[data-status]').show();
+            if (FiltroSituacao === 'Todos') {
+                $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando ambos são "Todos"
+            } else {
+                $('tbody[data-situacao="' + FiltroSituacao + '"]').show(); // Mostrar apenas com base no filtro de situação
+            }
         } else {
-            $('tbody[data-status="' + FiltroStatus + '"]').show();
+            if (FiltroSituacao === 'Todos') {
+                $('tbody[data-status="' + FiltroStatus + '"]').show(); // Mostrar apenas com base no filtro de status
+            } else {
+                $('tbody[data-situacao="' + FiltroSituacao + '"][data-status="' + FiltroStatus + '"]').show(); // Mostrar com base em ambos os filtros
+            }
         }
     }
 </script>
@@ -43,11 +61,11 @@
             <option value="Desligado">Desligado</option>
         </select>
 
-        <label for="status" class="form-label" style="margin-right: 10px; margin-left: 10px;">Outra Situação</label>
+        <label for="status" class="form-label" style="margin-right: 10px; margin-left: 10px;">Status</label>
         <select id="status" class="form-select" style="width: 150px;" onchange="atualizarFiltroStatus(this.value)">
             <option value="Todos">Todos</option>
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
+            <option value="Funcionando">Funcionando</option>
+            <option value="Queimado">Queimado</option>
         </select>
     </div>
 
@@ -57,8 +75,10 @@
                 <th scope="col"></th>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Status</th>
+                <th scope="col">Situação</th>
                 <th scope="col">Ligada pela última vez</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -66,26 +86,38 @@
         {
             <tbody data-situacao="@lampada.situacao_lampada" data-status="@lampada.status_lampada">
                 <tr>
-                    @if (@lampada.situacao_lampada == "Ligado")
+                    @if (@lampada.situacao_lampada == "Ligado" && @lampada.status_lampada == "Funcionando")
                     {
                         <td>
                             <img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
-                    else
+                    else if (@lampada.situacao_lampada == "Desligado" && @lampada.status_lampada == "Funcionando")
                     {
                         <td>
                             <img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48">
+                        </td>
+                    }
+                    else if (@lampada.status_lampada == "Queimado")
+                    {
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/812/812926.png" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
                     <th scope="row">@lampada.id_lampada</th>
                     <td>@lampada.nome_lampada</td>
                     <td>@lampada.situacao_lampada</td>
                     <td>@lampada.data_ultima_atualizacao?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@lampada.status_lampada</td>
                     <td>
                         <a href="@Url.Action("Detalhes", "Home", new { id_lampada =  lampada.id_lampada})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
+                    </td>
+                    <td>
+            @*             <a>
+                            <img src="https://cdn-icons-png.flaticon.com/512/574/574433.png" alt="Descrição da imagem" width="48" height="48">
+                        </a> *@
                     </td>
                 </tr>
             </tbody>

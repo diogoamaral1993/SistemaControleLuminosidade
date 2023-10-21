@@ -8,7 +8,7 @@ CREATE TABLE tb_lampada
 			 data_ultima_atualizacao DATETIME NULL,
 			 quantidade_vezes_ligacao INT NULL,
 			 situacao_lampada VARCHAR(10) NOT NULL, --L(Ligada), D(Desligada)
-			 status_lampada VARCHAR(10) NOT NULL) --A(Ativa), I(Inativa)
+			 status_lampada VARCHAR(15) NOT NULL) --A(Ativa), I(Inativa)
 
 CREATE TABLE tb_sensor
             (id_sensor INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
@@ -27,15 +27,16 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (3,
+	  VALUES (1,
 	          'BL1_A1_SP1.1_L1',
 	          '10/05/2023',
-			  GETDATE(),
-			  'Ligado',
-			  'Ativo',
+			  '10/20/2023',
+			  'Desligado',
+			  'Funcionando',
 			  5)
 
-INSERT INTO tb_lampada 
+
+			  INSERT INTO tb_lampada 
             (id_sensor,
 			 nome_lampada, 
 			 data_inclusao,
@@ -43,13 +44,34 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (3,
+	  VALUES (1,
 	          'BL1_A1_SP1.1_L2',
-	          '10/05/2023',
+	          GETDATE(),
+			  GETDATE(),
+			  'Ligado',
+			  'Funcionando',
+			  5)
+
+
+			  INSERT INTO tb_lampada 
+            (id_sensor,
+			 nome_lampada, 
+			 data_inclusao,
+			 data_ultima_atualizacao,
+			 situacao_lampada,
+			 status_lampada,
+			 quantidade_vezes_ligacao,
+			 data_fim)
+	  VALUES (1,
+	          'BL1_A1_SP1.1_L2',
+	          '07/01/2023 15:30',
 			  GETDATE() - 1,
 			  'Desligado',
-			  'Ativo',
-			  9)
+			  'Queimado',
+			  150,
+			  GETDATE())
+
+
 			  
 INSERT INTO tb_sensor
             (nome_sensor, 
@@ -63,9 +85,13 @@ INSERT INTO tb_sensor
 
 			 SELECT * FROM tb_lampada
 
+			 SELECT * FROM tb_sensor
+
 			 delete tb_lampada
 
 			 drop table tb_lampada
+
+			 drop table tb_sensor
 
 
 
