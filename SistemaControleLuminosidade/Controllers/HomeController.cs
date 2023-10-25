@@ -27,5 +27,13 @@ namespace SistemaControleLuminosidade.Controllers
             var lampada = Repositore.BuscarLampadaPorId(id_lampada);
             return View(lampada);
         }
+
+        public string InformarComoQueimada(int id_lampada)
+        {
+            LampadaRepositore Repositore = new LampadaRepositore();
+            var lampada = Repositore.BuscarLampadaPorId(id_lampada);
+            Repositore.InformarComoQueimada(lampada);
+            return "O status da lampada foi alterado para queimada";
+        }
     }
 }

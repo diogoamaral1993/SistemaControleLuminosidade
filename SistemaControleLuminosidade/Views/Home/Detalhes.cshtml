@@ -2,21 +2,44 @@
 @{
     ViewData["Title"] = "Detalhes";
 }
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function teste(id_lampada) {
+        if (id_lampada != null) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("InformarComoQueimada", "Home")",
+                data: { id_lampada: id_lampada },
+                success: function (response) {
+                    window.location.reload();
+                    alert("Resposta do servidor: " + response);
+                },
+                error: function (error) {
+                    alert("Ocorreu um erro na solicitação.");
+                }
+            });
+        }
+    }
+</script>
+
 <div class="text-center">
     <form>
         <fieldset disabled>
             <legend>Detalhes</legend>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">ID</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.id_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id_lampada>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.nome_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome_lampada>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Situação da lâmpada</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.situacao_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.situacao_lampada>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Data de inclusão da lampada</label>
@@ -35,21 +58,13 @@
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Quantidade de acionamentos</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="@(Model.quantidade_vezes_ligacao ?? 0)">
+                <input type="text" id="disabledTextInput" class="form-control" value="@(Model.quantidade_vezes_ligacao ?? 0)">
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Status</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.status_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.status_lampada>
             </div>
-@*             <div class="mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-                    <label class="form-check-label" for="disabledFieldsetCheck">
-                        Can't check this
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button> *@
         </fieldset>
+        <button class="btn btn-primary" type="submit" onclick="teste(@Model.id_lampada)">Informar como queimada</button>
     </form>
 </div>

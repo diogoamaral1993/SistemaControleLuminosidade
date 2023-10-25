@@ -23,5 +23,13 @@ namespace SistemaControleLuminosidade.Repositore
         {
             return context.tb_lampada.FirstOrDefault(l => l.id_lampada == id_lampada);
         }
+
+        public Boolean InformarComoQueimada(tb_lampada lampada) 
+        {
+            lampada.status_lampada = "Queimado";
+            context.tb_lampada.Update(lampada);
+            context.SaveChanges();
+            return true;
+        }
     }
 }

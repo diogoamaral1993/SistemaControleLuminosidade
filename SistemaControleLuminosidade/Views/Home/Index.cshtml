@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
     var FiltroSituacao = "Todos";
     var FiltroStatus = "Todos";
+    int? diferencaEmDias = 0;
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,6 +50,11 @@
             }
         }
     }
+
+    function exibirMensagem() {
+        alert("ATENÇÃO: Essa lampada não é ligada a mais de 1 dia, isso pode indicar um problema no local!!!");
+    }
+
 </script>
 
 <div class="text-center">
@@ -84,6 +90,13 @@
         </thead>
         @foreach (var lampada in Model)
         {
+            {
+                if (lampada.status_lampada == "Funcionando" && lampada.data_ultima_atualizacao != null)
+                {
+                    TimeSpan? diferenca = DateTime.Now - lampada.data_ultima_atualizacao;
+                    diferencaEmDias = diferenca?.Days;
+                }
+            }
             <tbody data-situacao="@lampada.situacao_lampada" data-status="@lampada.status_lampada">
                 <tr>
                     @if (@lampada.situacao_lampada == "Ligado" && @lampada.status_lampada == "Funcionando")
@@ -115,9 +128,13 @@
                         </a>
                     </td>
                     <td>
-            @*             <a>
-                            <img src="https://cdn-icons-png.flaticon.com/512/574/574433.png" alt="Descrição da imagem" width="48" height="48">
-                        </a> *@
+                        <a>
+                            @if (lampada.status_lampada == "Funcionando" && diferencaEmDias >= 1)
+                            {
+                                <img src="https://cdn-icons-png.flaticon.com/512/574/574433.png" alt="Descrição da imagem" width="48" height="48" onclick="exibirMensagem()" style="cursor: pointer;">
+                            }
+
+                        </a>
                     </td>
                 </tr>
             </tbody>

@@ -72,7 +72,8 @@ INSERT INTO tb_lampada
 			  GETDATE())
 
 
-			  
+			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
+			
 INSERT INTO tb_sensor
             (nome_sensor, 
 			 data_inclusao, 
@@ -95,4 +96,4 @@ INSERT INTO tb_sensor
 
 
 
-			
+			update tb_lampada set status_lampada = 'Funcionando' where id_lampada = 21
