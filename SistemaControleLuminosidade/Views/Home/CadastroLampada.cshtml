@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Lampada";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        // Quando a página é carregada
+
+        // Faça uma solicitação AJAX para buscar os dados da tabela
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("BuscarSensores", "Home")",
+            data: {},
+            success: function (data) {
+                // Supondo que 'data' seja um array de objetos com os dados da tabela
+
+                // Selecione o combobox
+                var comboBox = document.getElementById("comboBox");
+
+                // Preencha o combobox com as opções
+                data.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.value = item.valor; // Defina o valor da opção
+                    option.text = item.texto; // Defina o texto da opção
+                    comboBox.appendChild(option);
+                });
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    });
+
+</script>
+
+<script>
+
+    function CadastrarLampada() {
+        var Nome = document.getElementById("NomeText").value;
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("CadastrarLampada", "Home")",
+            data: { nome: Nome },
+            success: function (response) {
+                window.location.reload();
+                alert(response);
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    }
+</script>
+
+<div class="text-center">
+    <form>
+        <fieldset>
+            <legend>Cadastro de Lampada</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
+                <input type="text" id="NomeText" class="form-control">
+            </div>
+            <div class="mb-3">
+                <select id="comboBox" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                </select>
+            </div>
+        </fieldset>
+    </form>
+    <button class="btn btn-primary" type="submit" onclick="CadastrarLampada()">Salvar</button>
+</div>

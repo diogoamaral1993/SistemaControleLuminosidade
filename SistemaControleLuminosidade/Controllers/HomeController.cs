@@ -28,6 +28,21 @@ namespace SistemaControleLuminosidade.Controllers
             return View(lampada);
         }
 
+        public IActionResult CadastroLampada(int id_lampada)
+        {
+            return View();
+        }
+
+        public string CadastrarLampada(string nome)
+        {
+            return "";
+        }
+
+        public string BuscarSensores()
+        {
+            return "";
+        }
+
         public string InformarComoQueimada(int id_lampada)
         {
             LampadaRepositore Repositore = new LampadaRepositore();

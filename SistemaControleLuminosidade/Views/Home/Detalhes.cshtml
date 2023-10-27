@@ -7,7 +7,7 @@
 
 <script>
 
-    function teste(id_lampada) {
+    function InformarComoQueimada(id_lampada) {
         if (id_lampada != null) {
             $.ajax({
                 type: "POST",
@@ -65,9 +65,6 @@
                 <input type="text" id="disabledTextInput" class="form-control" value=@Model.status_lampada>
             </div>
         </fieldset>
-        <a href="#" onclick="teste(@Model.id_lampada);">
-            <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
-        </a>
-        @* <button class="btn btn-primary" type="submit" onclick="teste(@Model.id_lampada)">Informar como queimada</button> *@
     </form>
+    <button class="btn btn-primary" type="submit" onclick="InformarComoQueimada(@Model.id_lampada)">Informar como queimada</button>
 </div>
