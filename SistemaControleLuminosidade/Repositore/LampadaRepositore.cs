@@ -27,6 +27,7 @@ namespace SistemaControleLuminosidade.Repositore
         public Boolean InformarComoQueimada(tb_lampada lampada) 
         {
             lampada.status_lampada = "Queimado";
+            lampada.situacao_lampada = "Desligado";
             context.tb_lampada.Update(lampada);
             context.SaveChanges();
             return true;

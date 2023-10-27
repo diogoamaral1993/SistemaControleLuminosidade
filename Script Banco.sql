@@ -96,4 +96,5 @@ INSERT INTO tb_sensor
 
 
 
-			update tb_lampada set status_lampada = 'Funcionando' where id_lampada = 21
+			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 22
+
