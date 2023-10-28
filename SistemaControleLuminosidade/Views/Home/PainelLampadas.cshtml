@@ -133,7 +133,7 @@
                     </td>
                     <td>
                         <a>
-                            @if (lampada.status_lampada.Trim() == "Funcionando" && diferencaEmDias >= 1)
+                            @if (lampada.status_lampada.Trim() == "Funcionando" && lampada.data_ultima_atualizacao != null && diferencaEmDias >= 1)
                             {
                                 <img src="https://cdn-icons-png.flaticon.com/512/574/574433.png" alt="Descrição da imagem" width="48" height="48" onclick="exibirMensagem()" style="cursor: pointer;">
                             }

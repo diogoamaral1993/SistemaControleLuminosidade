@@ -35,6 +35,14 @@ namespace SistemaControleLuminosidade.Controllers
             return View(lampada);
         }
 
+        public IActionResult DetalhesSensor(int id_sensor)
+        {
+            SensorRepositore Repositore = new SensorRepositore();
+            var sensor = Repositore.BuscarSensorPorId(id_sensor);
+            ViewBag.ListaSensoresFuncionando = Repositore.BuscarSensoresSubstituicao(id_sensor);
+            return View(sensor);
+        }
+
         public IActionResult CadastroLampada()
         {
             SensorRepositore Repositore = new SensorRepositore();
@@ -73,12 +81,32 @@ namespace SistemaControleLuminosidade.Controllers
             return "Sensor cadastrado com sucesso!";
         }
 
-        public string InformarComoQueimada(int id_lampada)
+        public string InformarLampadaComoQueimada(int id_lampada)
         {
             LampadaRepositore Repositore = new LampadaRepositore();
             var lampada = Repositore.BuscarLampadaPorId(id_lampada);
             Repositore.InformarComoQueimada(lampada);
             return "O status da lampada foi alterado para queimada";
+        }
+
+        public string InformarSensorComoQueimado(int id_sensor, int id_sensor_substituto)
+        {
+            SensorRepositore Repositore = new SensorRepositore();
+            var sensor = Repositore.BuscarSensorPorId(id_sensor);
+            if (id_sensor_substituto != 0 && sensor.tipo_sensor == "Luz") 
+            {
+                Repositore.SubstituirSensor(sensor, id_sensor_substituto);
+            }
+            else if(id_sensor_substituto == 0 && sensor.tipo_sensor == "Luz")
+            {
+                return "É necessário selecionar um sensor de luz substituto";
+            }
+            else if (id_sensor_substituto == 0 && sensor.tipo_sensor != "Luz")
+            {
+                Repositore.InformarComoQueimado(sensor);
+            }
+
+            return "O status do sensor foi alterado para queimado";
         }
     }
 }

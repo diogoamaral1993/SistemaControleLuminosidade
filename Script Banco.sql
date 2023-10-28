@@ -86,13 +86,24 @@ INSERT INTO tb_sensor
 			 'Luz',
 			 'Funcionando')
 
+			 INSERT INTO tb_sensor
+            (nome_sensor, 
+			 data_inclusao, 
+			 tipo_sensor,
+			 status_sensor)
+     VALUES
+            ('Sensor luminosidade 2', 
+			 '10/15/2023', 
+			 'Luz',
+			 'Funcionando')
+
 INSERT INTO tb_sensor
             (nome_sensor, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 status_sensor)
      VALUES
-            ('Sensor luminosidade 3', 
+            ('Sensor presença 1', 
 			 '10/20/2023', 
 			 'Presença',
 			 'Funcionando')
@@ -114,6 +125,11 @@ INSERT INTO tb_sensor
 			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 4
 
 
-			update tb_sensor set status_sensor = 'Queimado' where id_sensor = 1
+			update tb_sensor set status_sensor = 'Funcionando' where id_sensor = 2002
 				update tb_sensor set nome_sensor = 'Sensor presença' where id_sensor = 1
+
+
+
+
+				select * from tb_lampada where status_lampada = 'Funcionando' and id_sensor = 2
 

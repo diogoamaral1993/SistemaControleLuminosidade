@@ -28,6 +28,7 @@ namespace SistemaControleLuminosidade.Repositore
         {
             lampada.status_lampada = "Queimado";
             lampada.situacao_lampada = "Desligado";
+            lampada.data_fim = DateTime.Now;
             context.tb_lampada.Update(lampada);
             context.SaveChanges();
             return true;
