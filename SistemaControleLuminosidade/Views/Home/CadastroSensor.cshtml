@@ -1,24 +1,23 @@
 ﻿@model List<tb_sensor>
 @{
-    ViewData["Title"] = "Cadastro de Lampada";
-    var id_sensor = 0;
+    ViewData["Title"] = "Cadastro de Sensor";
+    var tipo_sensor = "";
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 
-    function AtualizarSensor(valor)
-    {
-        id_sensor = valor
+    function AtualizarTipoSensor(valor) {
+        tipo_sensor = valor
     }
 
     function CadastrarLampada() {
-        var nome_lampada = document.getElementById("NomeText").value;
+        var nome_sensor = document.getElementById("NomeText").value;
         $.ajax({
             type: "POST",
-            url: "@Url.Action("CadastrarLampada", "Home")",
-            data: { nome_lampada: nome_lampada, id_sensor: id_sensor },
+            url: "@Url.Action("CadastrarSensor", "Home")",
+            data: { nome_sensor: nome_sensor, tipo_sensor: tipo_sensor },
             success: function (response) {
                 window.location.reload();
                 alert(response);
@@ -34,18 +33,16 @@
 <div class="text-center">
     <form>
         <fieldset>
-            <legend>Cadastro de Lampada</legend>
+            <legend>Cadastro de Sensor</legend>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
                 <input type="text" id="NomeText" class="form-control">
             </div>
             <div class="mb-3">
-                <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarSensor(this.value)">
-                    <option selected>Vincule um sensor de luminosidade</option>
-                    @foreach (var sensor in Model)
-                    {
-                        <option value=@sensor.id_sensor>@sensor.nome_sensor</option>
-                    }
+                <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarTipoSensor(this.value)">
+                    <option selected>Selecione o tipo de sensor</option>
+                    <option value=Presença>Presença</option>
+                    <option value=Luz>Luz</option>
                 </select>
             </div>
         </fieldset>

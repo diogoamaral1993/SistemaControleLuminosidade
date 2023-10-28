@@ -18,5 +18,16 @@ namespace SistemaControleLuminosidade.Repositore
         {
             return context.tb_sensor.Where(s => s.tipo_sensor == "Luz" && s.status_sensor == "Funcionando").ToList();
         }
+
+        public List<tb_sensor> BuscarSensores()
+        {
+            return context.tb_sensor.ToList();
+        }
+
+        public void CadastrarSensor(tb_sensor sensor)
+        {
+            context.tb_sensor.Add(sensor);
+            context.SaveChanges();
+        }
     }
 }

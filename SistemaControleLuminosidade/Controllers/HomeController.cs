@@ -14,14 +14,21 @@ namespace SistemaControleLuminosidade.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult PainelLampadas()
         {
             LampadaRepositore Repositore = new LampadaRepositore();
             var lampadas = Repositore.BuscarLampadas();
             return View(lampadas);
         }
 
-        public IActionResult Detalhes(int id_lampada)
+        public IActionResult PainelSensores()
+        {
+            SensorRepositore Repositore = new SensorRepositore();
+            var sensores = Repositore.BuscarSensores();
+            return View(sensores);
+        }
+
+        public IActionResult DetalhesLampada(int id_lampada)
         {
             LampadaRepositore Repositore = new LampadaRepositore();
             var lampada = Repositore.BuscarLampadaPorId(id_lampada);
@@ -33,6 +40,11 @@ namespace SistemaControleLuminosidade.Controllers
             SensorRepositore Repositore = new SensorRepositore();
             var sensores = Repositore.BuscarSensoresFuncionando();
             return View(sensores);
+        }
+
+        public IActionResult CadastroSensor()
+        {
+            return View();
         }
 
         public string CadastrarLampada(string nome_lampada, int id_sensor)
@@ -47,6 +59,18 @@ namespace SistemaControleLuminosidade.Controllers
             LampadaRepositore Repositore = new LampadaRepositore();
             Repositore.CadastrarLampada(lampada);
             return "Lampada cadastrada com sucesso!";
+        }
+
+        public string CadastrarSensor(string nome_sensor, string tipo_sensor)
+        {
+            tb_sensor sensor = new tb_sensor();
+            sensor.nome_sensor = nome_sensor;
+            sensor.status_sensor = "Funcionando";
+            sensor.data_inclusao = DateTime.Now;
+            sensor.tipo_sensor = tipo_sensor;
+            SensorRepositore Repositore = new SensorRepositore();
+            Repositore.CadastrarSensor(sensor);
+            return "Sensor cadastrado com sucesso!";
         }
 
         public string InformarComoQueimada(int id_lampada)

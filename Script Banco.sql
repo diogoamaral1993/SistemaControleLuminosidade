@@ -16,7 +16,7 @@ CREATE TABLE tb_sensor
 			 data_inclusao DATETIME NOT NULL, 
 			 data_fim DATETIME NULL,
 			 tipo_sensor VARCHAR(10), --Luz, Presença
-			 status_sensor CHAR(15) NOT NULL) --Funcionando, Queimado
+			 status_sensor VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 
 --SCRIPT INSERT DE DADOS TESTE
@@ -102,15 +102,18 @@ INSERT INTO tb_sensor
 
 			 SELECT * FROM tb_sensor
 
+			 delete tb_sensor
 			 delete tb_lampada
 
-			 delete tb_sensor
 
 			 drop table tb_lampada
 
 			 drop table tb_sensor
 
 
-
 			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 4
+
+
+			update tb_sensor set status_sensor = 'Queimado' where id_sensor = 1
+				update tb_sensor set nome_sensor = 'Sensor presença' where id_sensor = 1
 

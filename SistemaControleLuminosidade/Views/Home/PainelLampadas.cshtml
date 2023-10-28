@@ -58,7 +58,7 @@
 </script>
 
 <div class="text-center">
-    <h1 class="display-4">Painel de Controle</h1>
+    <h1 class="display-4">Painel de Lampadas</h1>
     <div class="mb-3" style="display: flex; align-items: center;">
         <label for="situacao" class="form-label" style="float: left; margin-right: 10px;">Situação</label>
         <select id="situacao" class="form-select" style="width: 150px;" onchange="atualizarFiltroSituacao(this.value)">
@@ -95,7 +95,7 @@
         @foreach (var lampada in Model)
         {
             {
-                if (lampada.status_lampada == "Funcionando" && lampada.data_ultima_atualizacao != null)
+                if (lampada.status_lampada.Trim() == "Funcionando" && lampada.data_ultima_atualizacao != null)
                 {
                     TimeSpan? diferenca = DateTime.Now - lampada.data_ultima_atualizacao;
                     diferencaEmDias = diferenca?.Days;
@@ -103,19 +103,19 @@
             }
             <tbody data-situacao="@lampada.situacao_lampada" data-status="@lampada.status_lampada">
                 <tr>
-                    @if (@lampada.situacao_lampada == "Ligado" && @lampada.status_lampada == "Funcionando")
+                    @if (@lampada.situacao_lampada.Trim() == "Ligado" && @lampada.status_lampada.Trim() == "Funcionando")
                     {
                         <td>
                             <img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
-                    else if (@lampada.situacao_lampada == "Desligado" && @lampada.status_lampada == "Funcionando")
+                    else if (@lampada.situacao_lampada.Trim() == "Desligado" && @lampada.status_lampada.Trim() == "Funcionando")
                     {
                         <td>
                             <img src="https://cdn-icons-png.flaticon.com/512/1537/1537466.png" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
-                    else if (@lampada.status_lampada == "Queimado")
+                    else if (@lampada.status_lampada.Trim() == "Queimado")
                     {
                         <td>
                             <img src="https://cdn-icons-png.flaticon.com/512/812/812926.png" alt="Descrição da imagem" width="48" height="48">
@@ -127,13 +127,13 @@
                     <td>@lampada.data_ultima_atualizacao?.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>@lampada.status_lampada</td>
                     <td>
-                        <a href="@Url.Action("Detalhes", "Home", new { id_lampada =  lampada.id_lampada})">
+                        <a href="@Url.Action("DetalhesLampada", "Home", new { id_lampada =  lampada.id_lampada})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
                     </td>
                     <td>
                         <a>
-                            @if (lampada.status_lampada == "Funcionando" && diferencaEmDias >= 1)
+                            @if (lampada.status_lampada.Trim() == "Funcionando" && diferencaEmDias >= 1)
                             {
                                 <img src="https://cdn-icons-png.flaticon.com/512/574/574433.png" alt="Descrição da imagem" width="48" height="48" onclick="exibirMensagem()" style="cursor: pointer;">
                             }

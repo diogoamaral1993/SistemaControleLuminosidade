@@ -1,0 +1,78 @@
+﻿@model List<tb_sensor>
+@{
+    ViewData["Title"] = "Home Page";
+    var FiltroStatus = "Todos";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function atualizarFiltroStatus(valor) {
+        FiltroStatus = valor;
+
+        // Use jQuery para mostrar/ocultar as linhas da tabela
+        $('tbody[data-status]').hide();
+
+        if (FiltroStatus === 'Todos') {
+            $('[data-status]').show(); // Mostrar todas as linhas quando ambos são "Todos"
+        } else {
+            $('tbody[data-status="' + FiltroStatus + '"]').show(); // Mostrar apenas com base no filtro de status
+        }
+    }
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Painel de Sensores</h1>
+    <div class="mb-3" style="display: flex; align-items: center;">
+
+        <label for="status" class="form-label" style="margin-right: 10px; margin-left: 10px;">Status</label>
+        <select id="status" class="form-select" style="width: 150px;" onchange="atualizarFiltroStatus(this.value)">
+            <option value="Todos">Todos</option>
+            <option value="Funcionando">Funcionando</option>
+            <option value="Queimado">Queimado</option>
+        </select>
+
+        <a href="@Url.Action("CadastroSensor", "Home", new {})">
+            <button class="btn btn-primary" type="submit" style="float: right; margin-left: 925px;" onclick="">Cadastrar Sensor</button>
+        </a>
+    </div>
+
+    <table class="table" id="tabelaLampadas">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        @foreach (var sensor in Model)
+        {
+            <tbody data-status="@sensor.status_sensor">
+                <tr>
+                    @if (@sensor.status_sensor.Trim() == "Funcionando")
+                    {
+                        <td>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1wb0bIAnymYOScysmjjc9vbMG1hT-GxUPiXtb7yuceqcttsr0lcpuq511xQvfVJzvX_U&usqp=CAU" alt="Descrição da imagem" width="48" height="48">
+                        </td>
+                    }
+                    else if (@sensor.status_sensor.Trim() == "Queimado")
+                    {
+                        <td>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuDyP06g5w0BpLI2VHlsLT2_WpT4S1BJTohXOgL4-62EF-VsEZqtCxqhj-_yZLTKUn85Y&usqp=CAU" alt="Descrição da imagem" width="48" height="48">
+                        </td>
+                    }
+                    <th scope="row">@sensor.id_sensor</th>
+                    <td>@sensor.nome_sensor</td>
+                    <td>@sensor.status_sensor</td>
+                    <td>
+                        <a href="@Url.Action("DetalhesSensor", "Home", new { id_lampada =  sensor.id_sensor})">
+                            <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
