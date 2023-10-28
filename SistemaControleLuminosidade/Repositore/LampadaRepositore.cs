@@ -32,5 +32,11 @@ namespace SistemaControleLuminosidade.Repositore
             context.SaveChanges();
             return true;
         }
+
+        public void CadastrarLampada(tb_lampada lampada) 
+        {
+            context.tb_lampada.Add(lampada);
+            context.SaveChanges();
+        }
     }
 }

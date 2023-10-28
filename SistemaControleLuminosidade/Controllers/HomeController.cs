@@ -28,19 +28,25 @@ namespace SistemaControleLuminosidade.Controllers
             return View(lampada);
         }
 
-        public IActionResult CadastroLampada(int id_lampada)
+        public IActionResult CadastroLampada()
         {
-            return View();
+            SensorRepositore Repositore = new SensorRepositore();
+            var sensores = Repositore.BuscarSensoresFuncionando();
+            return View(sensores);
         }
 
-        public string CadastrarLampada(string nome)
+        public string CadastrarLampada(string nome_lampada, int id_sensor)
         {
-            return "";
-        }
-
-        public string BuscarSensores()
-        {
-            return "";
+            tb_lampada lampada = new tb_lampada();
+            lampada.id_sensor = id_sensor;
+            lampada.nome_lampada = nome_lampada;
+            lampada.status_lampada = "Funcionando";
+            lampada.situacao_lampada = "Desligado";
+            lampada.data_inclusao = DateTime.Now;
+            lampada.quantidade_vezes_ligacao = 0;
+            LampadaRepositore Repositore = new LampadaRepositore();
+            Repositore.CadastrarLampada(lampada);
+            return "Lampada cadastrada com sucesso!";
         }
 
         public string InformarComoQueimada(int id_lampada)

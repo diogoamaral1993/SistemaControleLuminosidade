@@ -7,15 +7,16 @@ CREATE TABLE tb_lampada
 			 data_fim DATETIME NULL,
 			 data_ultima_atualizacao DATETIME NULL,
 			 quantidade_vezes_ligacao INT NULL,
-			 situacao_lampada VARCHAR(10) NOT NULL, --L(Ligada), D(Desligada)
-			 status_lampada VARCHAR(15) NOT NULL) --A(Ativa), I(Inativa)
+			 situacao_lampada VARCHAR(10) NOT NULL, --Ligado, Desligado
+			 status_lampada VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 CREATE TABLE tb_sensor
             (id_sensor INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
 			 nome_sensor VARCHAR(30) NOT NULL,
 			 data_inclusao DATETIME NOT NULL, 
 			 data_fim DATETIME NULL,
-			 status_sensor CHAR(1) NOT NULL) --A(Ativa), I(Inativa)
+			 tipo_sensor VARCHAR(10), --Luz, Presença
+			 status_sensor CHAR(15) NOT NULL) --Funcionando, Queimado
 
 
 --SCRIPT INSERT DE DADOS TESTE
@@ -27,7 +28,7 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (1,
+	  VALUES (2,
 	          'BL1_A1_SP1.1_L1',
 	          '10/05/2023',
 			  '10/20/2023',
@@ -44,7 +45,7 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (1,
+	  VALUES (2,
 	          'BL1_A1_SP1.1_L2',
 	          GETDATE(),
 			  GETDATE(),
@@ -62,7 +63,7 @@ INSERT INTO tb_lampada
 			 status_lampada,
 			 quantidade_vezes_ligacao,
 			 data_fim)
-	  VALUES (1,
+	  VALUES (2,
 	          'BL1_A1_SP1.1_L2',
 	          '07/01/2023 15:30',
 			  GETDATE() - 1,
@@ -77,11 +78,24 @@ INSERT INTO tb_lampada
 INSERT INTO tb_sensor
             (nome_sensor, 
 			 data_inclusao, 
+			 tipo_sensor,
 			 status_sensor)
      VALUES
-            ('Sensor luminosidade', 
+            ('Sensor luminosidade 1', 
 			 '10/05/2023', 
-			 'A')
+			 'Luz',
+			 'Funcionando')
+
+INSERT INTO tb_sensor
+            (nome_sensor, 
+			 data_inclusao, 
+			 tipo_sensor,
+			 status_sensor)
+     VALUES
+            ('Sensor luminosidade 3', 
+			 '10/20/2023', 
+			 'Presença',
+			 'Funcionando')
 
 
 			 SELECT * FROM tb_lampada
@@ -89,6 +103,8 @@ INSERT INTO tb_sensor
 			 SELECT * FROM tb_sensor
 
 			 delete tb_lampada
+
+			 delete tb_sensor
 
 			 drop table tb_lampada
 
