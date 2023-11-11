@@ -28,8 +28,8 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (2,
-	          'BL1_A1_SP1.1_L1',
+	  VALUES (1,
+	          'BL1_A1_L1',
 	          '10/05/2023',
 			  '10/20/2023',
 			  'Desligado',
@@ -45,8 +45,8 @@ INSERT INTO tb_lampada
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao)
-	  VALUES (2,
-	          'BL1_A1_SP1.1_L2',
+	  VALUES (1,
+	          'BL1_A1_L2',
 	          GETDATE(),
 			  GETDATE(),
 			  'Ligado',
@@ -64,7 +64,7 @@ INSERT INTO tb_lampada
 			 quantidade_vezes_ligacao,
 			 data_fim)
 	  VALUES (2,
-	          'BL1_A1_SP1.1_L2',
+	          'BL1_A2_L1',
 	          '07/01/2023 15:30',
 			  GETDATE() - 1,
 			  'Desligado',
@@ -81,7 +81,7 @@ INSERT INTO tb_sensor
 			 tipo_sensor,
 			 status_sensor)
      VALUES
-            ('Sensor luminosidade 1', 
+            ('BL1_A1_SL1', 
 			 '10/05/2023', 
 			 'Luz',
 			 'Funcionando')
@@ -92,7 +92,7 @@ INSERT INTO tb_sensor
 			 tipo_sensor,
 			 status_sensor)
      VALUES
-            ('Sensor luminosidade 2', 
+            ('BL1_A2_SL1', 
 			 '10/15/2023', 
 			 'Luz',
 			 'Funcionando')
@@ -103,7 +103,7 @@ INSERT INTO tb_sensor
 			 tipo_sensor,
 			 status_sensor)
      VALUES
-            ('Sensor presença 1', 
+            ('BL1_A1_SP1', 
 			 '10/20/2023', 
 			 'Presença',
 			 'Funcionando')
@@ -125,7 +125,7 @@ INSERT INTO tb_sensor
 			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 4
 
 
-			update tb_sensor set status_sensor = 'Funcionando' where id_sensor = 2002
+			update tb_sensor set status_sensor = 'Funcionando' where id_sensor = 2
 				update tb_sensor set nome_sensor = 'Sensor presença' where id_sensor = 1
 
 
@@ -133,3 +133,9 @@ INSERT INTO tb_sensor
 
 				select * from tb_lampada where status_lampada = 'Funcionando' and id_sensor = 2
 
+
+--BL: Bloco
+--A: Andar
+--SP: Sensor de Presença
+--SP: Sensor de Luz
+--L: Lâmpada

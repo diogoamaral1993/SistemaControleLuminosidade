@@ -1,53 +1,42 @@
 ﻿@model List<tb_lampada>
 @{
     ViewData["Title"] = "Home Page";
-    var FiltroSituacao = "Todos";
-    var FiltroStatus = "Todos";
     int? diferencaEmDias = 0;
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+   
+    var FiltroSituacao = "Todos";
+    var FiltroStatus = "Todos";
+
     function atualizarFiltroSituacao(valor) {
         FiltroSituacao = valor;
-
-        // Use jQuery para mostrar/ocultar as linhas da tabela
-        $('tbody[data-situacao][data-status]').hide();
-
-        if (FiltroSituacao === 'Todos') {
-            if (FiltroStatus === 'Todos') {
-                $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando ambos são "Todos"
-            } else {
-                $('tbody[data-status="' + FiltroStatus + '"]').show(); // Mostrar apenas com base no filtro de status
-            }
-        } else {
-            if (FiltroStatus === 'Todos') {
-                $('tbody[data-situacao="' + FiltroSituacao + '"]').show(); // Mostrar apenas com base no filtro de situação
-            } else {
-                $('tbody[data-situacao="' + FiltroSituacao + '"][data-status="' + FiltroStatus + '"]').show(); // Mostrar com base em ambos os filtros
-            }
-        }
+        atualizarTabela();
     }
 
     function atualizarFiltroStatus(valor) {
         FiltroStatus = valor;
+        atualizarTabela();
+    }
 
+    function atualizarTabela() {
         // Use jQuery para mostrar/ocultar as linhas da tabela
         $('tbody[data-situacao][data-status]').hide();
 
-        if (FiltroStatus === 'Todos') {
-            if (FiltroSituacao === 'Todos') {
-                $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando ambos são "Todos"
-            } else {
-                $('tbody[data-situacao="' + FiltroSituacao + '"]').show(); // Mostrar apenas com base no filtro de situação
-            }
+        if (FiltroSituacao === 'Todos' && FiltroStatus === 'Todos') {
+            $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando todos os filtros são "Todos"
         } else {
-            if (FiltroSituacao === 'Todos') {
-                $('tbody[data-status="' + FiltroStatus + '"]').show(); // Mostrar apenas com base no filtro de status
-            } else {
-                $('tbody[data-situacao="' + FiltroSituacao + '"][data-status="' + FiltroStatus + '"]').show(); // Mostrar com base em ambos os filtros
-            }
+            $('tbody[data-situacao][data-status]').each(function () {
+                var situacao = $(this).data('situacao');
+                var status = $(this).data('status');
+
+                if ((FiltroSituacao === 'Todos' || situacao === FiltroSituacao) &&
+                    (FiltroStatus === 'Todos' || status === FiltroStatus)) {
+                    $(this).show(); // Aplicar filtros
+                }
+            });
         }
     }
 
