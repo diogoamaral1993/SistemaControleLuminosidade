@@ -7,9 +7,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-   
+
     var FiltroSituacao = "Todos";
     var FiltroStatus = "Todos";
+    var FiltroBloco = "Todos";
 
     function atualizarFiltroSituacao(valor) {
         FiltroSituacao = valor;
@@ -21,23 +22,29 @@
         atualizarTabela();
     }
 
+    function atualizarFiltroBloco(valor) {
+        FiltroBloco = valor;
+        atualizarTabela();
+    }
+
     function atualizarTabela() {
         // Use jQuery para mostrar/ocultar as linhas da tabela
-        $('tbody[data-situacao][data-status]').hide();
+        $('tbody[data-situacao][data-status][data-bloco]').hide();
 
-        if (FiltroSituacao === 'Todos' && FiltroStatus === 'Todos') {
-            $('tbody[data-situacao][data-status]').show(); // Mostrar todas as linhas quando todos os filtros são "Todos"
-        } else {
-            $('tbody[data-situacao][data-status]').each(function () {
-                var situacao = $(this).data('situacao');
-                var status = $(this).data('status');
+        $('tbody[data-situacao][data-status][data-bloco]').each(function () {
+            var situacao = $(this).data('situacao');
+            var status = $(this).data('status');
+            var bloco = $(this).data('bloco');
 
-                if ((FiltroSituacao === 'Todos' || situacao === FiltroSituacao) &&
-                    (FiltroStatus === 'Todos' || status === FiltroStatus)) {
-                    $(this).show(); // Aplicar filtros
-                }
-            });
-        }
+            // Verifica se os filtros correspondem
+            if (
+                (FiltroSituacao === 'Todos' || situacao === FiltroSituacao) &&
+                (FiltroStatus === 'Todos' || status === FiltroStatus) &&
+                (FiltroBloco === 'Todos' || bloco === FiltroBloco)
+            ) {
+                $(this).show(); // Aplicar filtros
+            }
+        });
     }
 
     function exibirMensagem() {
@@ -63,8 +70,28 @@
             <option value="Queimado">Queimado</option>
         </select>
 
+        <label for="bloco" class="form-label" style="margin-right: 10px; margin-left: 10px;">Bloco</label>
+        <select id="bloco" class="form-select" style="width: 150px;" onchange="atualizarFiltroBloco(this.value)">
+            <option value="Todos">Todos</option>
+            <option value="BL1">BL1</option>
+            <option value="BL2">BL2</option>
+            <option value="BL3">BL3</option>
+            <option value="BL4">BL4</option>
+            <option value="BL5">BL5</option>
+            <option value="BL6">BL6</option>
+            <option value="BL7">BL7</option>
+            <option value="BL8">BL8</option>
+            <option value="BL9">BL9</option>
+            <option value="BL10">BL10</option>
+            <option value="BL11">BL11</option>
+            <option value="BL12">BL12</option>
+            <option value="BL13">BL13</option>
+            <option value="BL14">BL14</option>
+            <option value="BL15">BL15</option>
+        </select>
+
         <a href="@Url.Action("CadastroLampada", "Home", new {})">
-            <button class="btn btn-primary" type="submit" style="float: right; margin-left: 700px;" onclick="">Cadastrar Lampada</button>
+            <button class="btn btn-primary" type="submit" style="float: right; margin-left: 450px;" onclick="">Cadastrar Lampada</button>
         </a>
     </div>
 
@@ -90,7 +117,7 @@
                     diferencaEmDias = diferenca?.Days;
                 }
             }
-            <tbody data-situacao="@lampada.situacao_lampada" data-status="@lampada.status_lampada">
+            <tbody data-situacao="@lampada.situacao_lampada" data-status="@lampada.status_lampada" data-bloco="@lampada.bloco">
                 <tr>
                     @if (@lampada.situacao_lampada.Trim() == "Ligado" && @lampada.status_lampada.Trim() == "Funcionando")
                     {

@@ -13,6 +13,7 @@ namespace SistemaControleLuminosidade.Models
         public DateTime? data_ultima_atualizacao { get; set; }
         public int? quantidade_vezes_ligacao { get; set; }
         public string situacao_lampada { get; set; }
+        public string bloco { get; set; }
         public string status_lampada { get; set; }
     }
 }

@@ -55,7 +55,7 @@ namespace SistemaControleLuminosidade.Controllers
             return View();
         }
 
-        public string CadastrarLampada(string nome_lampada, int id_sensor)
+        public string CadastrarLampada(string nome_lampada, int id_sensor, string bloco)
         {
             tb_lampada lampada = new tb_lampada();
             lampada.id_sensor = id_sensor;
@@ -64,18 +64,20 @@ namespace SistemaControleLuminosidade.Controllers
             lampada.situacao_lampada = "Desligado";
             lampada.data_inclusao = DateTime.Now;
             lampada.quantidade_vezes_ligacao = 0;
+            lampada.bloco = bloco;
             LampadaRepositore Repositore = new LampadaRepositore();
             Repositore.CadastrarLampada(lampada);
             return "Lampada cadastrada com sucesso!";
         }
 
-        public string CadastrarSensor(string nome_sensor, string tipo_sensor)
+        public string CadastrarSensor(string nome_sensor, string tipo_sensor, string bloco)
         {
             tb_sensor sensor = new tb_sensor();
             sensor.nome_sensor = nome_sensor;
             sensor.status_sensor = "Funcionando";
             sensor.data_inclusao = DateTime.Now;
             sensor.tipo_sensor = tipo_sensor;
+            sensor.bloco = bloco;
             SensorRepositore Repositore = new SensorRepositore();
             Repositore.CadastrarSensor(sensor);
             return "Sensor cadastrado com sucesso!";

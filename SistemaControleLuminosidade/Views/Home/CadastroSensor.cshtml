@@ -12,12 +12,16 @@
         tipo_sensor = valor
     }
 
+    function AtualizarBloco(valor) {
+        bloco = valor
+    }
+
     function CadastrarLampada() {
         var nome_sensor = document.getElementById("NomeText").value;
         $.ajax({
             type: "POST",
             url: "@Url.Action("CadastrarSensor", "Home")",
-            data: { nome_sensor: nome_sensor, tipo_sensor: tipo_sensor },
+            data: { nome_sensor: nome_sensor, tipo_sensor: tipo_sensor, bloco: bloco },
             success: function (response) {
                 window.location.reload();
                 alert(response);
@@ -43,6 +47,26 @@
                     <option selected>Selecione o tipo de sensor</option>
                     <option value=Presença>Presença</option>
                     <option value=Luz>Luz</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarBloco(this.value)">
+                    <option selected>Selecione o bloco</option>
+                    <option value="BL1">BL1</option>
+                    <option value="BL2">BL2</option>
+                    <option value="BL3">BL3</option>
+                    <option value="BL4">BL4</option>
+                    <option value="BL5">BL5</option>
+                    <option value="BL6">BL6</option>
+                    <option value="BL7">BL7</option>
+                    <option value="BL8">BL8</option>
+                    <option value="BL9">BL9</option>
+                    <option value="BL10">BL10</option>
+                    <option value="BL11">BL11</option>
+                    <option value="BL12">BL12</option>
+                    <option value="BL13">BL13</option>
+                    <option value="BL14">BL14</option>
+                    <option value="BL15">BL15</option>
                 </select>
             </div>
         </fieldset>
