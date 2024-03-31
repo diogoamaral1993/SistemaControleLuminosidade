@@ -63,11 +63,11 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuDyP06g5w0BpLI2VHlsLT2_WpT4S1BJTohXOgL4-62EF-VsEZqtCxqhj-_yZLTKUn85Y&usqp=CAU" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
-                    <th scope="row">@sensor.id_sensor</th>
-                    <td>@sensor.nome_sensor</td>
+                    <th scope="row">@sensor.id</th>
+                    <td>@sensor.nome</td>
                     <td>@sensor.status_sensor</td>
                     <td>
-                        <a href="@Url.Action("DetalhesSensor", "Home", new { id_sensor =  sensor.id_sensor})">
+                        <a href="@Url.Action("DetalhesSensor", "Home", new { id_sensor =  sensor.id})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
                     </td>

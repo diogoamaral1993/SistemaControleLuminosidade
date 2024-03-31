@@ -1,13 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SistemaControleLuminosidade.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaControleLuminosidade.Models
 {
-    public class tb_lampada
+    public class tb_lampada : IComponente
     {
         [Key]
-        public int id_lampada { get; set; }
+        public int id { get; set; }
         public int id_sensor { get; set; }
-        public string nome_lampada { get; set; }
+        public string nome { get; set; }
         public DateTime data_inclusao { get; set; }
         public DateTime? data_fim { get; set; }
         public DateTime? data_ultima_atualizacao { get; set; }

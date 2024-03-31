@@ -40,11 +40,11 @@
             <legend>Detalhes</legend>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">ID</label>
-                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id_sensor>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
-                <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome_sensor>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Tipo de sensor</label>
@@ -80,12 +80,12 @@
                     <option selected>Selecione um sensor para substituir o atual</option>
                     @foreach (var sensor in ListaSensoresAtivos)
                     {
-                        <option value=@sensor.id_sensor>@sensor.nome_sensor</option>
+                        <option value=@sensor.id>@sensor.nome</option>
                     }
                 </select>
             </div>
         }
 
-        <button class="btn btn-primary" type="submit" onclick="InformarComoQueimado(@Model.id_sensor)">Informar como queimado</button>
+        <button class="btn btn-primary" type="submit" onclick="InformarComoQueimado(@Model.id)">Informar como queimado</button>
     }
 </div>

@@ -21,7 +21,7 @@ namespace SistemaControleLuminosidade.Repositore
 
         public List<tb_sensor> BuscarSensoresSubstituicao(int id_sensor)
         {
-            return context.tb_sensor.Where(s => s.tipo_sensor == "Luz" && s.status_sensor == "Funcionando" && s.id_sensor != id_sensor).ToList();
+            return context.tb_sensor.Where(s => s.tipo_sensor == "Luz" && s.status_sensor == "Funcionando" && s.id != id_sensor).ToList();
         }
 
         public List<tb_sensor> BuscarSensores()
@@ -31,7 +31,7 @@ namespace SistemaControleLuminosidade.Repositore
 
         public tb_sensor BuscarSensorPorId(int id_sensor)
         {
-            return context.tb_sensor.FirstOrDefault(s => s.id_sensor == id_sensor);
+            return context.tb_sensor.FirstOrDefault(s => s.id == id_sensor);
         }
 
         public void CadastrarSensor(tb_sensor sensor)
@@ -51,7 +51,7 @@ namespace SistemaControleLuminosidade.Repositore
 
         public Boolean SubstituirSensor(tb_sensor sensor, int id_sensor_substituto)
         {
-            var listalampadas = context.tb_lampada.Where(l => l.status_lampada == "Funcionando" && l.id_sensor == sensor.id_sensor).ToList();
+            var listalampadas = context.tb_lampada.Where(l => l.status_lampada == "Funcionando" && l.id_sensor == sensor.id).ToList();
          
             foreach (var lampada in listalampadas) 
             {

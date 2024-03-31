@@ -21,7 +21,7 @@ namespace SistemaControleLuminosidade.Repositore
 
         public tb_lampada BuscarLampadaPorId(int id_lampada) 
         {
-            return context.tb_lampada.FirstOrDefault(l => l.id_lampada == id_lampada);
+            return context.tb_lampada.FirstOrDefault(l => l.id == id_lampada);
         }
 
         public Boolean InformarComoQueimada(tb_lampada lampada) 

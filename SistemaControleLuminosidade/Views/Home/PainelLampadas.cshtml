@@ -137,13 +137,13 @@
                             <img src="https://cdn-icons-png.flaticon.com/512/812/812926.png" alt="Descrição da imagem" width="48" height="48">
                         </td>
                     }
-                    <th scope="row">@lampada.id_lampada</th>
-                    <td>@lampada.nome_lampada</td>
+                    <th scope="row">@lampada.id</th>
+                    <td>@lampada.nome</td>
                     <td>@lampada.situacao_lampada</td>
                     <td>@lampada.data_ultima_atualizacao?.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>@lampada.status_lampada</td>
                     <td>
-                        <a href="@Url.Action("DetalhesLampada", "Home", new { id_lampada =  lampada.id_lampada})">
+                        <a href="@Url.Action("DetalhesLampada", "Home", new { id_lampada =  lampada.id})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
                     </td>

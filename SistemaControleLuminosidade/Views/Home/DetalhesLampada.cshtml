@@ -31,11 +31,11 @@
             <legend>Detalhes</legend>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">ID</label>
-                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
-                <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome_lampada>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome>
             </div>
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">ID do sensor vinculado</label>
@@ -76,6 +76,6 @@
     </form>
     @if (Model.status_lampada != "Queimado")
     {
-        <button class="btn btn-primary" type="submit" onclick="InformarComoQueimada(@Model.id_lampada)">Informar como queimada</button>
+        <button class="btn btn-primary" type="submit" onclick="InformarComoQueimada(@Model.id)">Informar como queimada</button>
     }
 </div>

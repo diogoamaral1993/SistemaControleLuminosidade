@@ -59,7 +59,7 @@ namespace SistemaControleLuminosidade.Controllers
         {
             tb_lampada lampada = new tb_lampada();
             lampada.id_sensor = id_sensor;
-            lampada.nome_lampada = nome_lampada;
+            lampada.nome = nome_lampada;
             lampada.status_lampada = "Funcionando";
             lampada.situacao_lampada = "Desligado";
             lampada.data_inclusao = DateTime.Now;
@@ -73,7 +73,7 @@ namespace SistemaControleLuminosidade.Controllers
         public string CadastrarSensor(string nome_sensor, string tipo_sensor, string bloco)
         {
             tb_sensor sensor = new tb_sensor();
-            sensor.nome_sensor = nome_sensor;
+            sensor.nome = nome_sensor;
             sensor.status_sensor = "Funcionando";
             sensor.data_inclusao = DateTime.Now;
             sensor.tipo_sensor = tipo_sensor;
