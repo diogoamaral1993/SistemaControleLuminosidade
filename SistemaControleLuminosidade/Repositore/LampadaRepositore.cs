@@ -14,9 +14,14 @@ namespace SistemaControleLuminosidade.Repositore
             context = new ApplicationContext(optionsBuilder.Options);
         }
 
-        public List<tb_lampada> BuscarLampadas() 
+        public List<tb_lampada> BuscarLampadasEstoque() 
         {
-            return context.tb_lampada.ToList();
+            return context.tb_lampada.Where(l => l.status_lampada == "No estoque").ToList();
+        }
+
+        public List<tb_lampada> BuscarLampadas()
+        {
+            return context.tb_lampada.Where(l => l.status_lampada != "No estoque").ToList();
         }
 
         public tb_lampada BuscarLampadaPorId(int id_lampada) 

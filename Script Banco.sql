@@ -1,35 +1,38 @@
 --SCRIPT CRIAÇÃO DE TABELA
 CREATE TABLE tb_lampada 
-            (id_lampada INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
-			 id_sensor INT FOREIGN KEY (id_sensor) REFERENCES tb_sensor (id_sensor) NOT NULL,
-			 nome_lampada VARCHAR(30) NOT NULL, 
+            (id INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
+			 id_sensor INT FOREIGN KEY (id_sensor) REFERENCES tb_sensor (id) NULL,
+			 nome VARCHAR(30) NOT NULL, 
 			 data_inclusao DATETIME NOT NULL, 
 			 data_fim DATETIME NULL,
 			 data_ultima_atualizacao DATETIME NULL,
 			 quantidade_vezes_ligacao INT NULL,
-			 bloco VARCHAR(5) NOT NULL,
+			 bloco VARCHAR(5) NULL,
+			 tipo VARCHAR(10) NOT NULL,
 			 situacao_lampada VARCHAR(10) NOT NULL, --Ligado, Desligado
 			 status_lampada VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 CREATE TABLE tb_sensor
-            (id_sensor INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
-			 nome_sensor VARCHAR(30) NOT NULL,
+            (id INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
+			 nome VARCHAR(30) NOT NULL,
 			 data_inclusao DATETIME NOT NULL, 
 			 data_fim DATETIME NULL,
-			 tipo_sensor VARCHAR(10), --Luz, Presença
-			 bloco VARCHAR(5) NOT NULL,
+			 tipo_sensor VARCHAR(10) NOT NULL, --Luz, Presença
+			 bloco VARCHAR(5) NULL,
+			 tipo VARCHAR(10) NOT NULL,
 			 status_sensor VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 
 --SCRIPT INSERT DE DADOS TESTE
 INSERT INTO tb_lampada 
             (id_sensor,
-			 nome_lampada, 
+			 nome, 
 			 data_inclusao,
 			 data_ultima_atualizacao,
 			 situacao_lampada,
 			 status_lampada,
 			 bloco,
+			 tipo,
 			 quantidade_vezes_ligacao)
 	  VALUES (1,
 	          'BL1_A1_L1',
@@ -38,17 +41,19 @@ INSERT INTO tb_lampada
 			  'Desligado',
 			  'Funcionando',
 			  'BL1',
+			  'Lampada',
 			  5)
 
 
 			  INSERT INTO tb_lampada 
             (id_sensor,
-			 nome_lampada, 
+			 nome, 
 			 data_inclusao,
 			 data_ultima_atualizacao,
 			 situacao_lampada,
 			 status_lampada,
 			 bloco,
+			 tipo,
 			 quantidade_vezes_ligacao)
 	  VALUES (1,
 	          'BL1_A1_L2',
@@ -57,18 +62,20 @@ INSERT INTO tb_lampada
 			  'Ligado',
 			  'Funcionando',
 			  'BL1',
+			  'Lampada',
 			  5)
 
 
 			  INSERT INTO tb_lampada 
             (id_sensor,
-			 nome_lampada, 
+			 nome, 
 			 data_inclusao,
 			 data_ultima_atualizacao,
 			 situacao_lampada,
 			 status_lampada,
 			 quantidade_vezes_ligacao,
 			 bloco,
+			 tipo,
 			 data_fim)
 	  VALUES (2,
 	          'BL2_A2_L1',
@@ -78,75 +85,116 @@ INSERT INTO tb_lampada
 			  'Queimado',
 			  150,
 			  'BL2',
+			  'Lampada',
+			  GETDATE())
+
+  INSERT INTO tb_lampada 
+            (nome, 
+			 data_inclusao,
+			 situacao_lampada,
+			 status_lampada,
+			 quantidade_vezes_ligacao,
+			 tipo,
+			 data_fim)
+	  VALUES ('No estoque',
+	          '07/01/2023 15:30',
+			  'Desligado',
+			  'No estoque',
+			  0,
+			  'Lampada',
 			  GETDATE())
 
 
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
 			
 INSERT INTO tb_sensor
-            (nome_sensor, 
+            (nome, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 bloco,
+			 tipo,
 			 status_sensor)
      VALUES
             ('BL1_A1_SL1', 
 			 '10/05/2023', 
 			 'Luz',
 			 'BL1',
+			 'Sensor',
 			 'Funcionando')
 
 INSERT INTO tb_sensor
-            (nome_sensor, 
+            (nome, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 bloco,
+			 tipo,
 			 status_sensor)
      VALUES
             ('BL2_A2_SL1', 
 			 '10/15/2023', 
 			 'Luz',
 			 'BL2',
+			 'Sensor',
 			 'Funcionando')
 
 INSERT INTO tb_sensor
-            (nome_sensor, 
+            (nome, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 bloco,
+			 tipo,
 			 status_sensor)
      VALUES
             ('BL2_A3_SL1', 
 			 '10/15/2023', 
 			 'Luz',
 			 'BL2',
+			 'Sensor',
 			 'Funcionando')
 
 INSERT INTO tb_sensor
-            (nome_sensor, 
+            (nome, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 bloco,
+			 tipo,
 			 status_sensor)
      VALUES
             ('BL3_A1_SL1', 
 			 '10/15/2023', 
 			 'Luz',
 			 'BL3',
+			 'Sensor',
 			 'Funcionando')
 
 INSERT INTO tb_sensor
-            (nome_sensor, 
+            (nome, 
 			 data_inclusao, 
 			 tipo_sensor,
 			 bloco,
+			 tipo,
 			 status_sensor)
      VALUES
             ('BL1_A1_SP1', 
 			 '10/20/2023', 
 			 'Presença',
 			 'BL1',
+			 'Sensor',
 			 'Funcionando')
+
+
+			 INSERT INTO tb_sensor
+            (nome, 
+			 data_inclusao, 
+			 tipo_sensor,
+			 tipo,
+			 status_sensor)
+     VALUES
+            ('No estoque', 
+			 '10/20/2023', 
+			 'Presença',
+			 'Sensor',
+			 'No estoque')
 
 
 			 SELECT * FROM tb_lampada

@@ -1,0 +1,80 @@
+﻿@using SistemaControleLuminosidade.Interfaces;
+
+@model List<IComponente>
+@{
+    ViewData["Title"] = "Home Page";
+    var FiltroStatus = "Todos";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function atualizarFiltroTipo(valor) {
+        FiltroTipo = valor;
+
+        // Use jQuery para mostrar/ocultar as linhas da tabela
+        $('tbody[data-tipo]').hide();
+
+        if (FiltroTipo === 'Todos') {
+            $('[data-tipo]').show(); // Mostrar todas as linhas quando ambos são "Todos"
+        } else {
+            $('tbody[data-tipo="' + FiltroTipo + '"]').show(); // Mostrar apenas com base no filtro de tipo
+        }
+    }
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Painel de Estoque</h1>
+    <div class="mb-3" style="display: flex; align-items: center;">
+
+        <label for="tipo" class="form-label" style="margin-right: 10px; margin-left: 10px;">Status</label>
+        <select id="tipo" class="form-select" style="width: 150px;" onchange="atualizarFiltroTipo(this.value)">
+            <option value="Todos">Todos</option>
+            <option value="Lampada">Lampada</option>
+            <option value="Sensor">Sensor</option>
+        </select>
+
+        <a href="@Url.Action("Cadastrar", "Home", new {})">
+            <button class="btn btn-primary" type="submit" style="float: right; margin-left: 925px;" onclick="">Cadastrar</button>
+        </a>
+    </div>
+
+    <table class="table" id="tabelaComponentes">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Tipo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        @foreach (var componente in Model)
+        {
+            <tbody data-tipo="@componente.tipo">
+                <tr>
+                    @if (@componente.tipo.Trim() == "Sensor")
+                    {
+                        <td>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1wb0bIAnymYOScysmjjc9vbMG1hT-GxUPiXtb7yuceqcttsr0lcpuq511xQvfVJzvX_U&usqp=CAU" alt="Descrição da imagem" width="48" height="48">
+                        </td>
+                    }
+                    else if (@componente.tipo.Trim() == "Lampada")
+                    {
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3305/3305969.png" alt="Descrição da imagem" width="48" height="48">
+                        </td>
+                    }
+                    <th scope="row">@componente.id</th>
+                    <td>@componente.nome</td>
+                    <td>@componente.tipo</td>
+                    <td>
+                        <a href="@Url.Action("DetalhesSensor", "Home", new { id_sensor =  @componente.id})">
+                            <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

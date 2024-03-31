@@ -24,9 +24,14 @@ namespace SistemaControleLuminosidade.Repositore
             return context.tb_sensor.Where(s => s.tipo_sensor == "Luz" && s.status_sensor == "Funcionando" && s.id != id_sensor).ToList();
         }
 
+        public List<tb_sensor> BuscarSensoresEstoque()
+        {
+            return context.tb_sensor.Where(s => s.status_sensor == "No estoque").ToList();
+        }
+
         public List<tb_sensor> BuscarSensores()
         {
-            return context.tb_sensor.ToList();
+            return context.tb_sensor.Where(s => s.status_sensor != "No estoque").ToList();
         }
 
         public tb_sensor BuscarSensorPorId(int id_sensor)

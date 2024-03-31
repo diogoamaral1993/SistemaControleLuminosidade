@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaControleLuminosidade.Interfaces;
 using SistemaControleLuminosidade.Models;
 using SistemaControleLuminosidade.Repositore;
 using System.Diagnostics;
@@ -26,6 +27,34 @@ namespace SistemaControleLuminosidade.Controllers
             SensorRepositore Repositore = new SensorRepositore();
             var sensores = Repositore.BuscarSensores();
             return View(sensores);
+        }
+
+        public IActionResult PainelEstoque()
+        {
+            SensorRepositore RepositoreSensor = new SensorRepositore();
+            var sensores = RepositoreSensor.BuscarSensoresEstoque();
+            LampadaRepositore RepositoreLmapada = new LampadaRepositore();
+            var lampadas = RepositoreLmapada.BuscarLampadasEstoque();
+
+            List<IComponente> listaComponentes = new List<IComponente>();
+
+            foreach (var sensor in sensores)
+            {
+                if (sensor.status_sensor == "No estoque")
+                {
+                    listaComponentes.Add(sensor);
+                }
+            }
+
+            foreach (var lampada in lampadas)
+            {
+                if (lampada.status_lampada == "No estoque")
+                {
+                    listaComponentes.Add(lampada);
+                }
+            }
+
+            return View(listaComponentes);
         }
 
         public IActionResult DetalhesLampada(int id_lampada)
