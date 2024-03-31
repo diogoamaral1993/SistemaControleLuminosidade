@@ -72,31 +72,51 @@ namespace SistemaControleLuminosidade.Controllers
             return View(sensor);
         }
 
+        public IActionResult DetalhesCoponente(int id_componente, string tipo)
+        {
+            if (tipo == "Lampada")
+            {
+                LampadaRepositore repositore = new LampadaRepositore();
+                var componente = repositore.BuscarLampadaPorId(id_componente);
+                return View(componente);
+            }
+            else
+            {
+                SensorRepositore Repositore = new SensorRepositore();
+                var componente = Repositore.BuscarSensorPorId(id_componente);
+                return View(componente);
+
+            }
+
+        }
+
         public IActionResult CadastroLampada()
         {
-            SensorRepositore Repositore = new SensorRepositore();
-            var sensores = Repositore.BuscarSensoresFuncionando();
-            return View(sensores);
+            SensorRepositore RepositoreSensor = new SensorRepositore();
+            LampadaRepositore RepositoreLampada = new LampadaRepositore();
+            var sensores = RepositoreSensor.BuscarSensoresFuncionando();
+            var lampadas = RepositoreLampada.BuscarLampadasEstoque();
+            var Listas = new Tuple<List<tb_lampada>, List<tb_sensor>>(lampadas, sensores);
+            return View(Listas);
         }
 
         public IActionResult CadastroSensor()
         {
-            return View();
+            SensorRepositore repositore = new SensorRepositore();
+            var sensores = repositore.BuscarSensoresEstoque();
+            return View(sensores);
         }
 
-        public string CadastrarLampada(string nome_lampada, int id_sensor, string bloco)
+        public string VincularLampada(int id_lampada, int id_sensor, string bloco)
         {
-            tb_lampada lampada = new tb_lampada();
-            lampada.id_sensor = id_sensor;
-            lampada.nome = nome_lampada;
-            lampada.status_lampada = "Funcionando";
-            lampada.situacao_lampada = "Desligado";
-            lampada.data_inclusao = DateTime.Now;
-            lampada.quantidade_vezes_ligacao = 0;
-            lampada.bloco = bloco;
             LampadaRepositore Repositore = new LampadaRepositore();
-            Repositore.CadastrarLampada(lampada);
+            Repositore.TirarLmapadaEstoque(id_lampada, id_sensor, bloco);
             return "Lampada cadastrada com sucesso!";
+        }
+
+        public IActionResult CadastroCoponente()
+        {
+            return View();
         }
 
         public string CadastrarSensor(string nome_sensor, string tipo_sensor, string bloco)
@@ -112,32 +132,93 @@ namespace SistemaControleLuminosidade.Controllers
             return "Sensor cadastrado com sucesso!";
         }
 
-        public string InformarLampadaComoQueimada(int id_lampada)
+        public string AtualizarComponenteEstoque(string nome_componente, int id_componente, string tipo)
         {
-            LampadaRepositore Repositore = new LampadaRepositore();
-            var lampada = Repositore.BuscarLampadaPorId(id_lampada);
-            Repositore.InformarComoQueimada(lampada);
-            return "O status da lampada foi alterado para queimada";
+            if (tipo == "Lampada")
+            {
+                LampadaRepositore repositore = new LampadaRepositore();
+                var componente = repositore.BuscarLampadaPorId(id_componente);
+                repositore.AtualizarLampadaEstoque(componente, nome_componente);
+            }
+            else
+            {
+                SensorRepositore repositore = new SensorRepositore();
+                var componente = repositore.BuscarSensorPorId(id_componente);
+                componente.nome = nome_componente;
+                repositore.AtualizarSensorEstoque(componente);
+            }
+            return "Atualizado com Sucesso!";
         }
 
-        public string InformarSensorComoQueimado(int id_sensor, int id_sensor_substituto)
+        public string CadastrarComponente(string nome_componente, string tipo_sensor, string tipo_componente)
+        {
+            if (tipo_componente == "Lampada")
+            {
+                tb_lampada lampada = new tb_lampada();
+                lampada.nome = nome_componente;
+                lampada.status_lampada = "No estoque";
+                lampada.data_inclusao = DateTime.Now;
+                lampada.tipo = tipo_componente;
+                lampada.situacao_lampada = "Desligado";
+                LampadaRepositore Repositore = new LampadaRepositore();
+                Repositore.CadastrarLampada(lampada);
+            }
+            else if (tipo_componente == "Sensor")
+            {
+                tb_sensor sensor = new tb_sensor();
+                sensor.nome = nome_componente;
+                sensor.status_sensor = "No estoque";
+                sensor.data_inclusao = DateTime.Now;
+                sensor.tipo_sensor = tipo_sensor;
+                sensor.tipo = tipo_componente;
+                SensorRepositore Repositore = new SensorRepositore();
+                Repositore.CadastrarSensor(sensor);
+            }
+
+
+            return "Cadastrado com sucesso!";
+        }
+
+
+        public string CadastrarSensorEstoque(int id_sensor, string tipo_sensor, string bloco)
         {
             SensorRepositore Repositore = new SensorRepositore();
             var sensor = Repositore.BuscarSensorPorId(id_sensor);
-            if (id_sensor_substituto != 0 && sensor.tipo_sensor == "Luz") 
-            {
-                Repositore.SubstituirSensor(sensor, id_sensor_substituto);
-            }
-            else if(id_sensor_substituto == 0 && sensor.tipo_sensor == "Luz")
-            {
-                return "É necessário selecionar um sensor de luz substituto";
-            }
-            else if (id_sensor_substituto == 0 && sensor.tipo_sensor != "Luz")
-            {
-                Repositore.InformarComoQueimado(sensor);
-            }
+            sensor.status_sensor = "Funcionando";
+            sensor.tipo_sensor = tipo_sensor;
+            sensor.bloco = bloco;
 
-            return "O status do sensor foi alterado para queimado";
+            Repositore.AtualizarSensorEstoque(sensor);
+
+            return "Sensor cadastrado com sucesso!";
         }
+
+    public string InformarLampadaComoQueimada(int id_lampada)
+    {
+        LampadaRepositore Repositore = new LampadaRepositore();
+        var lampada = Repositore.BuscarLampadaPorId(id_lampada);
+        Repositore.InformarComoQueimada(lampada);
+        return "O status da lampada foi alterado para queimada";
     }
+
+    public string InformarSensorComoQueimado(int id_sensor, int id_sensor_substituto)
+    {
+        SensorRepositore Repositore = new SensorRepositore();
+        var sensor = Repositore.BuscarSensorPorId(id_sensor);
+        if (id_sensor_substituto != 0 && sensor.tipo_sensor == "Luz")
+        {
+            Repositore.SubstituirSensor(sensor, id_sensor_substituto);
+        }
+        else if (id_sensor_substituto == 0 && sensor.tipo_sensor == "Luz")
+        {
+            return "É necessário selecionar um sensor de luz substituto";
+        }
+        else if (id_sensor_substituto == 0 && sensor.tipo_sensor != "Luz")
+        {
+            Repositore.InformarComoQueimado(sensor);
+        }
+
+        return "O status do sensor foi alterado para queimado";
+    }
+}
 }

@@ -69,5 +69,11 @@ namespace SistemaControleLuminosidade.Repositore
             context.SaveChanges();
             return true;
         }
+
+        public void AtualizarSensorEstoque(tb_sensor sensor)
+        {
+            context.Update(sensor);
+            context.SaveChanges();
+        }
     }
 }

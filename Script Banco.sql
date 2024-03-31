@@ -105,6 +105,8 @@ INSERT INTO tb_lampada
 			  GETDATE())
 
 
+
+
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
 			
 INSERT INTO tb_sensor
@@ -190,7 +192,7 @@ INSERT INTO tb_sensor
 			 tipo,
 			 status_sensor)
      VALUES
-            ('No estoque', 
+            ('NoEstoque', 
 			 '10/20/2023', 
 			 'Presença',
 			 'Sensor',

@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Cadastro Estoque";
+    var tipo_sensor = "";
+    var tipo_componente = "";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function AtualizarTipoComponente(valor) {
+        tipo_componente = valor;
+        if (tipo_componente == "Lampada") {
+            tipo_sensor = "";
+            document.getElementById("divSensor").style.display = "none";
+        }
+        else {
+            document.getElementById("divSensor").style.display = "block";
+        }
+    }
+
+    function AtualizarTipoSensor(valor) {
+        tipo_sensor = valor;
+    }
+
+    function CadastrarComponente() {
+        var nome_componente = document.getElementById("NomeText").value;
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("CadastrarComponente", "Home")",
+            data: { nome_componente: nome_componente, tipo_sensor: tipo_sensor, tipo_componente: tipo_componente },
+            success: function (response) {
+                window.location.reload();
+                alert(response);
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    }
+
+</script>
+
+<div class="text-center">
+    <form>
+        <fieldset>
+            <legend>Cadastro Estoque</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
+                <input type="text" id="NomeText" class="form-control">
+            </div>
+            <div class="mb-3">
+                <select id="comboBoxTipoComponente" class="form-select" aria-label="Default select example" onchange="AtualizarTipoComponente(this.value)">
+                    <option selected>Selecione o tipo de Componente</option>
+                    <option value=Lampada>Lampada</option>
+                    <option value=Sensor>Sensor</option>
+                </select>
+            </div>
+            <div class="mb-3" id="divSensor" style="display: none">
+                <select id="comboBoxTipoSensor" class="form-select" aria-label="Default select example" onchange="AtualizarTipoSensor(this.value)">
+                        <option selected>Selecione o tipo de sensor</option>
+                        <option value=Presença>Presença</option>
+                        <option value=Luz>Luz</option>
+                    </select>
+                </div>
+        </fieldset>
+    </form>
+    <button class="btn btn-primary" type="submit" onclick="CadastrarComponente()">Salvar</button>
+</div>

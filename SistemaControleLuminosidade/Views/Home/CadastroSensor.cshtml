@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Cadastro de Sensor";
     var tipo_sensor = "";
+    var bloco = "";
+    var id_sensor = "";
 }
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -16,12 +18,15 @@
         bloco = valor
     }
 
-    function CadastrarLampada() {
-        var nome_sensor = document.getElementById("NomeText").value;
+    function AtualizarId(valor) {
+        id_sensor = valor
+    }
+
+    function CadastrarSensor() {
         $.ajax({
             type: "POST",
-            url: "@Url.Action("CadastrarSensor", "Home")",
-            data: { nome_sensor: nome_sensor, tipo_sensor: tipo_sensor, bloco: bloco },
+            url: "@Url.Action("CadastrarSensorEstoque", "Home")",
+            data: {id_sensor: id_sensor, tipo_sensor: tipo_sensor, bloco: bloco },
             success: function (response) {
                 window.location.reload();
                 alert(response);
@@ -39,8 +44,13 @@
         <fieldset>
             <legend>Cadastro de Sensor</legend>
             <div class="mb-3">
-                <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
-                <input type="text" id="NomeText" class="form-control">
+                <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarId(this.value)">
+                    <option selected>Selecione um sensor do estoque</option>
+                    @foreach (var sensor in Model)
+                    {
+                        <option value="@sensor.id">@sensor.nome</option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarTipoSensor(this.value)">
@@ -71,5 +81,5 @@
             </div>
         </fieldset>
     </form>
-    <button class="btn btn-primary" type="submit" onclick="CadastrarLampada()">Salvar</button>
+    <button class="btn btn-primary" type="submit" onclick="CadastrarSensor()">Salvar</button>
 </div>

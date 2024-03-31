@@ -44,5 +44,24 @@ namespace SistemaControleLuminosidade.Repositore
             context.tb_lampada.Add(lampada);
             context.SaveChanges();
         }
+
+        public void TirarLmapadaEstoque(int id_lampada, int id_sensor, string bloco) 
+        {
+            var lampada = context.tb_lampada.FirstOrDefault(l => l.id == id_lampada);
+            lampada.status_lampada = "Funcionando";
+            lampada.situacao_lampada = "Desligado";
+            lampada.quantidade_vezes_ligacao = 0;
+            lampada.bloco = bloco;
+            lampada.id_sensor = id_sensor;
+            context.Update(lampada);
+            context.SaveChanges();
+        }
+
+        public void AtualizarLampadaEstoque(tb_lampada lampada, string nome) 
+        {
+            lampada.nome = nome;
+            context.Update(lampada);
+            context.SaveChanges();
+        }
     }
 }

@@ -34,7 +34,7 @@
             <option value="Sensor">Sensor</option>
         </select>
 
-        <a href="@Url.Action("Cadastrar", "Home", new {})">
+        <a href="@Url.Action("CadastroCoponente", "Home", new {})">
             <button class="btn btn-primary" type="submit" style="float: right; margin-left: 925px;" onclick="">Cadastrar</button>
         </a>
     </div>
@@ -69,7 +69,7 @@
                     <td>@componente.nome</td>
                     <td>@componente.tipo</td>
                     <td>
-                        <a href="@Url.Action("DetalhesSensor", "Home", new { id_sensor =  @componente.id})">
+                        <a href="@Url.Action("DetalhesCoponente", "Home", new { id_componente =  @componente.id, tipo = componente.tipo})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
                     </td>

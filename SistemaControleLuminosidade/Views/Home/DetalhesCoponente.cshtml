@@ -1,0 +1,43 @@
+﻿@using SistemaControleLuminosidade.Interfaces;
+@model IComponente
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function AtualizarComponenteEstoque(id_componente) {
+        var nome_componente = document.getElementById("NomeText").value;
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AtualizarComponenteEstoque", "Home")",
+            data: { id_componente: id_componente, nome_componente: nome_componente, tipo: "@Model.tipo" },
+            success: function (response) {
+                window.location.reload();
+                alert(response);
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    }
+</script>
+
+<div class="text-center">
+    <form>
+        <fieldset>
+            <legend>Detalhes</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">ID</label>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id disabled>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
+                <input type="text" id="NomeText" class="form-control" value="@Model.nome">
+            </div>
+        </fieldset>
+    </form>
+    <button class="btn btn-primary" type="submit" onclick="AtualizarComponenteEstoque(@Model.id)">Salvar</button>
+</div>

@@ -1,7 +1,8 @@
-﻿@model List<tb_sensor>
+﻿@model Tuple<List<tb_lampada>, List<tb_sensor>>
 @{
     ViewData["Title"] = "Cadastro de Lampada";
     var id_sensor = 0;
+    var id_lampada = 0;
     var bloco = "BL1";
 }
 
@@ -18,12 +19,15 @@
         bloco = valor
     }
 
+    function AtualizarLmapada(valor) {
+        id_lampada = valor
+    }
+
     function CadastrarLampada() {
-        var nome_lampada = document.getElementById("NomeText").value;
         $.ajax({
             type: "POST",
-            url: "@Url.Action("CadastrarLampada", "Home")",
-            data: { nome_lampada: nome_lampada, id_sensor: id_sensor, bloco: bloco },
+            url: "@Url.Action("VincularLampada", "Home")",
+            data: { id_lampada: id_lampada, id_sensor: id_sensor, bloco: bloco },
             success: function (response) {
                 window.location.reload();
                 alert(response);
@@ -41,8 +45,13 @@
         <fieldset>
             <legend>Cadastro de Lampada</legend>
             <div class="mb-3">
-                <label for="disabledTextInput" class="form-label" style="float: left;">Nome</label>
-                <input type="text" id="NomeText" class="form-control">
+                <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarLmapada(this.value)">
+                    <option selected>Selecione uma lampâda do estoque</option>
+                    @foreach (var lampada in Model.Item1)
+                    {
+                        <option value=@lampada.id>@lampada.nome</option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarBloco(this.value)">
@@ -67,7 +76,7 @@
             <div class="mb-3">
                 <select id="comboBox" class="form-select" aria-label="Default select example" onchange="AtualizarSensor(this.value)">
                     <option selected>Vincule um sensor de luminosidade</option>
-                    @foreach (var sensor in Model)
+                    @foreach (var sensor in Model.Item2)
                     {
                         <option value=@sensor.id>@sensor.nome</option>
                     }
