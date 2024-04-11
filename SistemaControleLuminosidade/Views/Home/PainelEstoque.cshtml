@@ -45,7 +45,9 @@
                 <th scope="col"></th>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Observação</th>
                 <th scope="col">Tipo</th>
+                <th scope="col">Preço</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -69,12 +71,12 @@
                     <td>@componente.nome</td>
                     <td>@componente.descricao</td>
                     <td>@componente.tipo</td>
+                    <td>R$ @componente.preco</td>
                     <td>
                         <a href="@Url.Action("DetalhesCoponente", "Home", new { id_componente =  @componente.id, tipo = componente.tipo})">
                             <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/edit.png" alt="Descrição da imagem" width="48" height="48">
                         </a>
                     </td>
-                    <td>@componente.preco</td>
                 </tr>
             </tbody>
         }

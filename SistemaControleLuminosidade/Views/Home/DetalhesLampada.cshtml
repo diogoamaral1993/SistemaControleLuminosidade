@@ -38,6 +38,10 @@
                 <input type="text" id="disabledTextInput" class="form-control" value=@Model.nome>
             </div>
             <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Observação</label>
+                <input type="text" id="disabledTextInput" class="form-control" value="@Model.descricao">
+            </div>
+            <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">ID do sensor vinculado</label>
                 <input type="text" id="disabledTextInput" class="form-control" value=@Model.id_sensor>
             </div>
@@ -71,6 +75,10 @@
             <div class="mb-3">
                 <label for="disabledTextInput" class="form-label" style="float: left;">Status</label>
                 <input type="text" id="disabledTextInput" class="form-control" value=@Model.status_lampada>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Preço</label>
+                <input type="text" id="disabledTextInput" class="form-control" value= "R$ @Model.preco">
             </div>
         </fieldset>
     </form>
