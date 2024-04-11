@@ -14,5 +14,7 @@ namespace SistemaControleLuminosidade.Models
         public string? bloco { get; set; }
         public string tipo { get; set; }
         public string status_sensor { get; set; }
+        public string descricao { get; set; }
+        public decimal preco { get; set; }
     }
 }

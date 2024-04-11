@@ -9,6 +9,8 @@ namespace SistemaControleLuminosidade.Models
         public int id { get; set; }
         public int? id_sensor { get; set; }
         public string nome { get; set; }
+        public string descricao { get; set; }
+        public decimal preco { get; set; }
         public DateTime data_inclusao { get; set; }
         public DateTime? data_fim { get; set; }
         public DateTime? data_ultima_atualizacao { get; set; }
