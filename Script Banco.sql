@@ -27,6 +27,12 @@ CREATE TABLE tb_sensor
 			 status_sensor VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 
+CREATE TABLE tb_usuario
+            (id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+			 usuario VARCHAR(20) NOT NULL,
+			 senha VARCHAR(30) NOT NULL)
+
+
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
 
 

@@ -3,40 +3,31 @@
     ViewData["Title"] = "Login";
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-
-    function AtualizarTipoComponente(valor) {
-        tipo_componente = valor;
-        if (tipo_componente == "Lampada") {
-            tipo_sensor = "";
-            document.getElementById("divSensor").style.display = "none";
-        }
-        else {
-            document.getElementById("divSensor").style.display = "block";
-        }
-    }
-
-    function AtualizarTipoSensor(valor) {
-        tipo_sensor = valor;
-    }
-
-    function CadastrarComponente() {
-        var nome_componente = document.getElementById("NomeText").value;
+    function FazerLogin() {
+        var usuario = document.getElementById("UsuarioText").value;
+        var senha = document.getElementById("SenhaText").value;
         $.ajax({
             type: "POST",
-            url: "@Url.Action("CadastrarComponente", "Home")",
-            data: { nome_componente: nome_componente, tipo_sensor: tipo_sensor, tipo_componente: tipo_componente },
+            url: "@Url.Action("FazerLogin", "Login")",
+            data: { usuario: usuario, senha: senha },
             success: function (response) {
-                window.location.reload();
-                alert(response);
+                if (response) {
+                    window.location.href = "@Url.Action("PainelLampadas", "Home")";
+                }
+                else {
+                    alert("Usuário e/ou senha inválidos");
+                }
             },
             error: function (error) {
                 alert("Ocorreu um erro na solicitação.");
             }
         });
     }
-
 </script>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -57,7 +48,7 @@
          background-image: url('https://img.freepik.com/vetores-premium/panorama-da-cidade-noturna-paisagem-colorida-retro-neon-futurista-paisagem-urbana-praia-edificios-no-centro-da-cidade-abstratos-fundo-vetorial-urbano-recente-predio-de-escritorios-bela-vista-ilustracao-da-paisagem-urbana_53562-14986.jpg');
          background-repeat: no-repeat;
          background-size: cover;">
-        <form style="background-color: #fff;    
+        <form style="background-color: #fff;
               display: flex;
               flex-direction: column;
               background-color: #fff;
@@ -65,20 +56,20 @@
               padding: 40px;
               box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
               gap: 5px">
-                <legend>Login</legend>
-                <br />
-                <br />
-                <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
-                    <label for="disabledTextInput" class="text-align: center;">Usuário</label>
-                    <input type="text" id="NomeText" class="text-align: center;">
-                </div>
-                <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
-                    <label for="disabledTextInput" class="text-align: center;">Senha</label>
-                    <input type="text" id="NomeText" class="text-align: center;">
-                </div>
+            <legend>Login</legend>
+            <br />
+            <br />
+            <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
+                <label for="disabledTextInput" class="text-align: center;">Usuário</label>
+                <input type="text" id="UsuarioText" class="text-align: center;">
+            </div>
+            <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
+                <label for="disabledTextInput" class="text-align: center;">Senha</label>
+                <input type="password" id="SenhaText" class="text-align: center;">
+            </div>
             </fieldset>
         </form>
-        <button class="btn btn-primary" type="submit" onclick="CadastrarComponente()">Entrar</button>
+        <button class="btn btn-primary" type="submit" onclick="FazerLogin()">Entrar</button>
     </div>
 </body>
 </html>
