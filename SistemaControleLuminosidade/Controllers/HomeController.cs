@@ -15,6 +15,11 @@ namespace SistemaControleLuminosidade.Controllers
             _logger = logger;
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public IActionResult PainelLampadas()
         {
             LampadaRepositore Repositore = new LampadaRepositore();

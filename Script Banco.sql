@@ -27,109 +27,49 @@ CREATE TABLE tb_sensor
 			 status_sensor VARCHAR(15) NOT NULL) --Funcionando, Queimado
 
 
---SCRIPT INSERT DE DADOS TESTE
-INSERT INTO tb_lampada 
-            (id_sensor,
-			 nome, 
-			 data_inclusao,
-			 data_ultima_atualizacao,
-			 situacao_lampada,
-			 status_lampada,
-			 bloco,
-			 tipo,
-			 quantidade_vezes_ligacao,
-			 descricao,
-			 preco)
-	  VALUES (1,
-	          'BL1_A1_L1',
-	          '10/05/2023',
-			  '10/20/2023',
-			  'Desligado',
-			  'Funcionando',
-			  'BL1',
-			  'Lampada',
-			  5,
-			  'Numero da nota 1531685343',
-			  10.00)
-
-
-			  INSERT INTO tb_lampada 
-            (id_sensor,
-			 nome, 
-			 data_inclusao,
-			 data_ultima_atualizacao,
-			 situacao_lampada,
-			 status_lampada,
-			 bloco,
-			 tipo,
-			 quantidade_vezes_ligacao,
-			 descricao,
-			 preco)
-	  VALUES (1,
-	          'BL1_A1_L2',
-	          GETDATE(),
-			  GETDATE(),
-			  'Ligado',
-			  'Funcionando',
-			  'BL1',
-			  'Lampada',
-			  5,
-			  'Numero da nota 1531685343',
-			  10.00)
-
-
-			  INSERT INTO tb_lampada 
-            (id_sensor,
-			 nome, 
-			 data_inclusao,
-			 data_ultima_atualizacao,
-			 situacao_lampada,
-			 status_lampada,
-			 quantidade_vezes_ligacao,
-			 bloco,
-			 tipo,
-			 data_fim,
-			 quantidade_vezes_ligacao,
-			 descricao,
-			 preco)
-	  VALUES (2,
-	          'BL2_A2_L1',
-	          '07/01/2023 15:30',
-			  GETDATE() - 1,
-			  'Desligado',
-			  'Queimado',
-			  150,
-			  'BL2',
-			  'Lampada',
-			  GETDATE(),
-			  100,
-			  'Numero da nota 1531685343',
-			  10.00)
-
-  INSERT INTO tb_lampada 
-            (nome, 
-			 data_inclusao,
-			 situacao_lampada,
-			 status_lampada,
-			 quantidade_vezes_ligacao,
-			 tipo,
-			 data_fim,
-			 descricao,
-			 preco)
-	  VALUES ('No estoque',
-	          '07/01/2023 15:30',
-			  'Desligado',
-			  'No estoque',
-			  0,
-			  'Lampada',
-			  GETDATE(),
-			  'Numero da nota 1531685343',
-			  10.00)
-
-
-
-
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
+
+
+
+			 SELECT * FROM tb_lampada
+
+			 SELECT * FROM tb_sensor
+
+			 delete tb_sensor
+			 delete tb_lampada
+
+
+			 drop table tb_lampada
+
+			 drop table tb_sensor
+
+
+			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 4
+
+
+			update tb_sensor set status_sensor = 'Funcionando' where id_sensor = 2
+				update tb_sensor set nome_sensor = 'Sensor presença' where id_sensor = 1
+
+
+
+
+				select * from tb_lampada where status_lampada = 'Funcionando' and id_sensor = 2
+
+				select * from tb_sensor
+
+
+--BL: Bloco
+--A: Andar
+--SP: Sensor de Presença
+--SP: Sensor de Luz
+--L: Lâmpada
+
+
+
+
+------------insert---------------------------------
+
+
 			
 INSERT INTO tb_sensor
             (nome, 
@@ -244,36 +184,99 @@ INSERT INTO tb_sensor
 			 'Numero da nota 4558877',
 			  25.50)
 
-
-			 SELECT * FROM tb_lampada
-
-			 SELECT * FROM tb_sensor
-
-			 delete tb_sensor
-			 delete tb_lampada
-
-
-			 drop table tb_lampada
-
-			 drop table tb_sensor
-
-
-			update tb_lampada set status_lampada = 'Funcionando', situacao_lampada = 'Ligado' where id_lampada = 4
-
-
-			update tb_sensor set status_sensor = 'Funcionando' where id_sensor = 2
-				update tb_sensor set nome_sensor = 'Sensor presença' where id_sensor = 1
-
-
-
-
-				select * from tb_lampada where status_lampada = 'Funcionando' and id_sensor = 2
-
-				select * from tb_sensor
+----------------------------------------------------
+INSERT INTO tb_lampada 
+            (id_sensor,
+			 nome, 
+			 data_inclusao,
+			 data_ultima_atualizacao,
+			 situacao_lampada,
+			 status_lampada,
+			 bloco,
+			 tipo,
+			 quantidade_vezes_ligacao,
+			 descricao,
+			 preco)
+	  VALUES (1,
+	          'BL1_A1_L1',
+	          '10/05/2023',
+			  '10/20/2023',
+			  'Desligado',
+			  'Funcionando',
+			  'BL1',
+			  'Lampada',
+			  5,
+			  'Numero da nota 1531685343',
+			  10.00)
 
 
---BL: Bloco
---A: Andar
---SP: Sensor de Presença
---SP: Sensor de Luz
---L: Lâmpada
+			  INSERT INTO tb_lampada 
+            (id_sensor,
+			 nome, 
+			 data_inclusao,
+			 data_ultima_atualizacao,
+			 situacao_lampada,
+			 status_lampada,
+			 bloco,
+			 tipo,
+			 quantidade_vezes_ligacao,
+			 descricao,
+			 preco)
+	  VALUES (1,
+	          'BL1_A1_L2',
+	          GETDATE(),
+			  GETDATE(),
+			  'Ligado',
+			  'Funcionando',
+			  'BL1',
+			  'Lampada',
+			  5,
+			  'Numero da nota 1531685343',
+			  10.00)
+
+
+			  INSERT INTO tb_lampada 
+            (id_sensor,
+			 nome, 
+			 data_inclusao,
+			 data_ultima_atualizacao,
+			 situacao_lampada,
+			 status_lampada,
+			 quantidade_vezes_ligacao,
+			 bloco,
+			 tipo,
+			 data_fim,
+			 descricao,
+			 preco)
+	  VALUES (2,
+	          'BL2_A2_L1',
+	          '07/01/2023 15:30',
+			  GETDATE() - 1,
+			  'Desligado',
+			  'Queimado',
+			  150,
+			  'BL2',
+			  'Lampada',
+			  GETDATE(),
+			  'Numero da nota 1531685343',
+			  10.00)
+
+  INSERT INTO tb_lampada 
+            (nome, 
+			 data_inclusao,
+			 situacao_lampada,
+			 status_lampada,
+			 quantidade_vezes_ligacao,
+			 tipo,
+			 data_fim,
+			 descricao,
+			 preco)
+	  VALUES ('No estoque',
+	          '07/01/2023 15:30',
+			  'Desligado',
+			  'No estoque',
+			  0,
+			  'Lampada',
+			  GETDATE(),
+			  'Numero da nota 1531685343',
+			  10.00)
