@@ -32,6 +32,8 @@ CREATE TABLE tb_usuario
 			 usuario VARCHAR(20) NOT NULL,
 			 senha VARCHAR(30) NOT NULL)
 
+			 INSERT INTO tb_usuario (usuario, senha) VALUES ('admin', '123')
+
 
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
 

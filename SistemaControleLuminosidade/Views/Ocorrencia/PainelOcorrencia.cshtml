@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function FazerLogin() {
+        var usuario = document.getElementById("UsuarioText").value;
+        var senha = document.getElementById("SenhaText").value;
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("FazerLogin", "Login")",
+            data: { usuario: usuario, senha: senha },
+            success: function (response) {
+                if (response) {
+                    window.location.href = "@Url.Action("PainelLampadas", "Home")";
+                }
+                else {
+                    alert("Usuário e/ou senha inválidos");
+                }
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    }
+</script>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sistema de Controle de Luminosidade</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SistemaControleLuminosidade.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="text-center" style="display: flex;
+         flex-direction: column;
+         align-items: center;
+         align-content: center;
+         justify-content: center;
+         width: 100%;
+         height: 100vh;
+         background-image: url('https://img.freepik.com/vetores-premium/panorama-da-cidade-noturna-paisagem-colorida-retro-neon-futurista-paisagem-urbana-praia-edificios-no-centro-da-cidade-abstratos-fundo-vetorial-urbano-recente-predio-de-escritorios-bela-vista-ilustracao-da-paisagem-urbana_53562-14986.jpg');
+         background-repeat: no-repeat;
+         background-size: cover;">
+        <form style="background-color: #fff;
+              display: flex;
+              flex-direction: column;
+              background-color: #fff;
+              border-radius: 7px;
+              padding: 40px;
+              box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+              gap: 5px">
+            <legend>Login</legend>
+            <br />
+            <br />
+            <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
+                <label for="disabledTextInput" class="text-align: center;">Usuário</label>
+                <input type="text" id="UsuarioText" class="text-align: center;">
+            </div>
+            <div style="width: 200px; height: 50px; text-align: center; margin: 0 auto">
+                <label for="disabledTextInput" class="text-align: center;">Senha</label>
+                <input type="password" id="SenhaText" class="text-align: center;">
+            </div>
+            </fieldset>
+        </form>
+        <button class="btn btn-primary" type="submit" onclick="FazerLogin()">Entrar</button>
+    </div>
+</body>
+</html>
