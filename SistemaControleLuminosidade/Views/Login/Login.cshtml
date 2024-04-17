@@ -15,7 +15,7 @@
             data: { usuario: usuario, senha: senha },
             success: function (response) {
                 if (response) {
-                    window.location.href = "@Url.Action("PainelLampadas", "Home")";
+                    window.location.href = "@Url.Action("PainelOcorrenciaAdmin", "Ocorrencia")";
                 }
                 else {
                     alert("Usuário e/ou senha inválidos");

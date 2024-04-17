@@ -14,5 +14,6 @@ namespace SistemaControleLuminosidade.Data
         public DbSet<tb_lampada> tb_lampada { get; set; }
         public DbSet<tb_sensor> tb_sensor { get; set; }
         public DbSet<tb_usuario> tb_usuario { get; set; }
+        public DbSet<tb_ocorrencia> tb_ocorrencia { get; set; }
     }
 }

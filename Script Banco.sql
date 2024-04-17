@@ -35,6 +35,15 @@ CREATE TABLE tb_usuario
 			 INSERT INTO tb_usuario (usuario, senha) VALUES ('admin', '123')
 
 
+CREATE TABLE tb_ocorrencia
+            (id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+			 descricao VARCHAR(100) NOT NULL,
+			 data_inclusao DATETIME NOT NULL,
+			 data_fim DATETIME NULL,
+			 status_ocorrencia VARCHAR(15) NOT NULL)
+
+			 drop table tb_ocorrencia
+
 			update tb_lampada set data_ultima_atualizacao = GETDATE() where id_lampada = 18
 
 
@@ -77,6 +86,12 @@ CREATE TABLE tb_usuario
 
 ------------insert---------------------------------
 
+INSERT INTO tb_ocorrencia (descricao, data_inclusao, status_ocorrencia) VALUES ('Lâmpada piscando no segundo andar', GETDATE(), 'Aberta')
+
+INSERT INTO tb_ocorrencia (descricao, data_inclusao, data_fim, status_ocorrencia) VALUES ('A lâmpada em frente do elevador no quarto andar, não está acendendo', '10/15/2023', GETDATE(), 'Fechada')
+
+delete tb_ocorrencia
+select * from tb_ocorrencia
 
 			
 INSERT INTO tb_sensor
