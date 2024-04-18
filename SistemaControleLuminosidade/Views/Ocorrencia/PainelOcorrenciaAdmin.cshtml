@@ -28,11 +28,11 @@
         <label for="status" class="form-label" style="margin-right: 10px; margin-left: 10px;">Status</label>
         <select id="status" class="form-select" style="width: 150px;" onchange="atualizarFiltroStatus(this.value)">
             <option value="Todos">Todos</option>
-            <option value="Funcionando">Funcionando</option>
-            <option value="Queimado">Queimado</option>
+            <option value="Aberta">Aberta</option>
+            <option value="Fechada">Fechada</option>
         </select>
 
-        <a href="@Url.Action("CadastroSensor", "Home", new {})">
+        <a href="@Url.Action("CadastroOcorrencia", "Ocorrencia", new {})">
             <button class="btn btn-primary" type="submit" style="float: right; margin-left: 925px;" onclick="">Cadastrar</button>
         </a>
     </div>

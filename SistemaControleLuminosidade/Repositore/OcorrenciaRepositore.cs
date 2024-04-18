@@ -19,5 +19,11 @@ namespace SistemaControleLuminosidade.Repositore
         {
             return context.tb_ocorrencia.ToList();
         }
+
+        public void CadastrarOcorrencia(tb_ocorrencia correncia)
+        {
+            context.tb_ocorrencia.Add(correncia);
+            context.SaveChanges();
+        }
     }
 }

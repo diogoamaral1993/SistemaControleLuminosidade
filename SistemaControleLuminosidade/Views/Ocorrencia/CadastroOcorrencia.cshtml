@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Ocorrencia";
+    var tipo_sensor = "";
+    var bloco = "";
+    var id_sensor = "";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function CadastrarOcorrencia() {
+        var descricao = document.getElementById("DescricaoText").value;
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("CadastrarOcorrencia", "Ocorrencia")",
+            data: { descricao: descricao },
+            success: function (response) {
+                window.location.reload();
+                alert(response);
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na solicitação.");
+            }
+        });
+    }
+
+</script>
+
+<div class="text-center">
+    <form>
+        <fieldset>
+            <legend>Cadastro de Ocorrencia</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Descrição</label>
+                <input type="text" id="DescricaoText" class="form-control">
+            </div>
+        </fieldset>
+    </form>
+    <button class="btn btn-primary" type="submit" onclick="CadastrarOcorrencia()">Salvar</button>
+</div>
