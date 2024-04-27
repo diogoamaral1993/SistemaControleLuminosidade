@@ -30,9 +30,13 @@ CREATE TABLE tb_sensor
 CREATE TABLE tb_usuario
             (id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 			 usuario VARCHAR(20) NOT NULL,
-			 senha VARCHAR(30) NOT NULL)
+			 senha VARCHAR(30) NOT NULL,
+			 tipo_usuario VARCHAR(10) NOT NULL)
 
-			 INSERT INTO tb_usuario (usuario, senha) VALUES ('admin', '123')
+			 drop table tb_usuario
+
+			 INSERT INTO tb_usuario (usuario, senha, tipo_usuario) VALUES ('admin', '123', 'admin')
+			 INSERT INTO tb_usuario (usuario, senha, tipo_usuario) VALUES ('moradorA', '123', 'normal')
 
 
 CREATE TABLE tb_ocorrencia

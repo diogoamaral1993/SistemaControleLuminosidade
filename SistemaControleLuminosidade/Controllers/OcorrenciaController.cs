@@ -28,5 +28,20 @@ namespace SistemaControleLuminosidade.Controllers
             repositore.CadastrarOcorrencia(ocorrencia);
             return "Ocorrencia cadastrada com sucesso";
         }
+
+        public IActionResult DetalhesOcorrencia(int id_ocorrencia) 
+        {
+            OcorrenciaRepositore Repositore = new OcorrenciaRepositore();
+            var lampada = Repositore.BuscarOcorrenciaPorId(id_ocorrencia);
+            return View(lampada);
+        }
+
+        public string FinalizarOcorrencia(int id_ocorrencia) 
+        {
+            OcorrenciaRepositore Repositore = new OcorrenciaRepositore();
+            var ocorrencia = Repositore.BuscarOcorrenciaPorId(id_ocorrencia);
+            Repositore.FinalizarOcorrencia(ocorrencia);
+            return "A ocorrência foi finalizada";
+        }
     }
 }

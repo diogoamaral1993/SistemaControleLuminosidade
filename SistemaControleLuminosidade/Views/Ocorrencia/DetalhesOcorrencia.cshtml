@@ -1,0 +1,57 @@
+﻿@model tb_ocorrencia
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function FinalizarOcorrencia(id_ocorrencia) {
+        if (id_ocorrencia != null) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("FinalizarOcorrencia", "Ocorrencia")",
+                data: { id_ocorrencia: id_ocorrencia },
+                success: function (response) {
+                    window.location.reload();
+                    alert(response);
+                },
+                error: function (error) {
+                    alert("Ocorreu um erro na solicitação.");
+                }
+            });
+        }
+    }
+</script>
+
+<div class="text-center">
+    <form>
+        <fieldset disabled>
+            <legend>Detalhes</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">ID</label>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.id>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Descrição</label>
+                <input type="text" id="disabledTextInput" class="form-control" value=@Model.descricao>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" style="float: left;">Data inclusão</label>
+                <input type="text" id="disabledTextInput" class="form-control" value="@Model.data_inclusao.ToString("dd/MM/yyyy HH:mm")">
+            </div>
+            @if (Model.data_fim != null)
+            {
+                <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label" style="float: left;">Data fim</label>
+                    <input type="text" id="disabledTextInput" class="form-control" value="@Model.data_fim?.ToString("dd/MM/yyyy HH:mm")">
+                </div>
+            }
+        </fieldset>
+    </form>
+    @if (Model.status_ocorrencia != "Fechada")
+    {
+        <button class="btn btn-primary" type="submit" onclick="FinalizarOcorrencia(@Model.id)">Finalizar Ocorrência</button>
+    }
+</div>
