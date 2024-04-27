@@ -14,8 +14,11 @@
             url: "@Url.Action("FazerLogin", "Login")",
             data: { usuario: usuario, senha: senha },
             success: function (response) {
-                if (response) {
+                if (response == "admin") {
                     window.location.href = "@Url.Action("PainelLampadas", "Home")";
+                }
+                else if (response == "normal") {
+                    window.location.href = "@Url.Action("PainelOcorrenciaMorador", "Ocorrencia")";
                 }
                 else {
                     alert("Usuário e/ou senha inválidos");

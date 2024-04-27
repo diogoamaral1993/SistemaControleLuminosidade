@@ -17,16 +17,21 @@ namespace SistemaControleLuminosidade.Controllers
             return View();
         }
 
-        public Boolean FazerLogin(string usuario, string senha)
+        public string FazerLogin(string usuario, string senha)
         {
             UsuarioRepositore repositore = new UsuarioRepositore();
-            if (repositore.FazerLogin(usuario, senha))
+            var login = repositore.FazerLogin(usuario, senha);
+            if (login != null && login.tipo_usuario == "admin")
             {
-                return true;
+                return "admin";
+            }
+            else if (login != null && login.tipo_usuario == "normal")
+            {
+                return "normal";
             }
             else 
             {
-                return false;
+                return "";
             }
         }
     }

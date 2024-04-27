@@ -13,7 +13,18 @@ namespace SistemaControleLuminosidade.Controllers
             return View(repositore.BuscarOcorrencias());
         }
 
+        public ActionResult PainelOcorrenciaMorador()
+        {
+            OcorrenciaRepositore repositore = new OcorrenciaRepositore();
+            return View(repositore.BuscarOcorrencias());
+        }
+
         public ActionResult CadastroOcorrencia()
+        {
+            return View();
+        }
+
+        public ActionResult CadastroOcorrenciaMorador()
         {
             return View();
         }

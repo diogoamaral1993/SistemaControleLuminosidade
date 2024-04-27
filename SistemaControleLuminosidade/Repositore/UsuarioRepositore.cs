@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaControleLuminosidade.Data;
+using SistemaControleLuminosidade.Models;
 
 namespace SistemaControleLuminosidade.Repositore
 {
@@ -14,10 +15,9 @@ namespace SistemaControleLuminosidade.Repositore
             context = new ApplicationContext(optionsBuilder.Options);
         }
 
-        public Boolean FazerLogin(string usuario, string senha) 
-        { 
-            Boolean usuarioExiste = ((context.tb_usuario.Where(u => u.usuario == usuario && u.senha == senha).ToList()).Count() == 1);
-            return usuarioExiste;
+        public tb_usuario FazerLogin(string usuario, string senha) 
+        {
+            return context.tb_usuario.Where(u => u.usuario == usuario && u.senha == senha).FirstOrDefault();
         }
     }
 }
