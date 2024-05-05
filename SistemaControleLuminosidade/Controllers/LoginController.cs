@@ -19,20 +19,29 @@ namespace SistemaControleLuminosidade.Controllers
 
         public string FazerLogin(string usuario, string senha)
         {
-            UsuarioRepositore repositore = new UsuarioRepositore();
-            var login = repositore.FazerLogin(usuario, senha);
-            if (login != null && login.tipo_usuario == "admin")
+            try
             {
-                return "admin";
+                UsuarioRepositore repositore = new UsuarioRepositore();
+                var login = repositore.FazerLogin(usuario, senha);
+                if (login != null && login.tipo_usuario == "admin")
+                {
+                    return "admin";
+                }
+                else if (login != null && login.tipo_usuario == "normal")
+                {
+                    return "normal";
+                }
+                else
+                {
+                    return "";
+                }
             }
-            else if (login != null && login.tipo_usuario == "normal")
+            catch (Exception ex)
             {
-                return "normal";
+
+                throw new Exception(ex.Message);
             }
-            else 
-            {
-                return "";
-            }
+
         }
     }
 }
