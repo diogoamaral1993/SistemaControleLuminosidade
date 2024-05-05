@@ -10,7 +10,7 @@ namespace SistemaControleLuminosidade.Repositore
         public LampadaRepositore()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("Data Source=master1.database.windows.net;Initial Catalog=master1;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=master1.database.windows.net;Authentication=Active Directory Integrated;Database=master1;");
             context = new ApplicationContext(optionsBuilder.Options);
         }
 
