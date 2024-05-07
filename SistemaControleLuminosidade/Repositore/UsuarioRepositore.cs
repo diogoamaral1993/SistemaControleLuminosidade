@@ -11,7 +11,7 @@ namespace SistemaControleLuminosidade.Repositore
         public UsuarioRepositore()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("Data Source=master1.database.windows.net;Initial Catalog=master1; Authentication=Active Directory Default; Encrypt=True;");
+            optionsBuilder.UseSqlServer("Server=tcp:master1.database.windows.net,1433;Initial Catalog=master1;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";");
             context = new ApplicationContext(optionsBuilder.Options);
         }
 
