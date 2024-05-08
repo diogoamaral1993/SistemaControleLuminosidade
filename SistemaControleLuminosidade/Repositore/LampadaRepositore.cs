@@ -10,7 +10,7 @@ namespace SistemaControleLuminosidade.Repositore
         public LampadaRepositore()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("Server=tcp:master1.database.windows.net,1433;Initial Catalog=master1;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";");
+            optionsBuilder.UseSqlServer("Server=tcp:servidor-devenvolvimento.database.windows.net,1433;Initial Catalog=BancoSistemaControleLuminosidade;Persist Security Info=False;User ID=diogo.amaral;Password=Ellen@1993;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             context = new ApplicationContext(optionsBuilder.Options);
         }
 
