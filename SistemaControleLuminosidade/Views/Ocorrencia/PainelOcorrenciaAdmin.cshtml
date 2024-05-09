@@ -67,8 +67,8 @@
                     }
                     <th scope="row">@ocorrencia.id</th>
                     <td>@ocorrencia.descricao</td>
-                    <td>@ocorrencia.data_inclusao.ToString("dd/MM/yyyy HH:mm")"</td>
-                    <td>@ocorrencia.data_fim?.ToString("dd/MM/yyyy HH:mm")"</td>
+                    <td>@ocorrencia.data_inclusao.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@ocorrencia.data_fim?.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>@ocorrencia.status_ocorrencia</td>
                     <td>
                         <a href="@Url.Action("DetalhesOcorrencia", "Ocorrencia", new { id_ocorrencia =  ocorrencia.id})">
