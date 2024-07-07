@@ -11,7 +11,8 @@ namespace SistemaControleLuminosidade.Repositore
         public SensorRepositore()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("Server=tcp:servidor-devenvolvimento.database.windows.net,1433;Initial Catalog=BancoSistemaControleLuminosidade;Persist Security Info=False;User ID=diogo.amaral;Password=Ellen@1993;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Server=tcp:servidor-devenvolvimento.database.windows.net,1433;Initial Catalog=BancoSistemaControleLuminosidade;Persist Security Info=False;User ID=diogo.amaral;Password=Ellen@1993;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             context = new ApplicationContext(optionsBuilder.Options);
         }
         public List<tb_sensor> BuscarSensoresFuncionando()
